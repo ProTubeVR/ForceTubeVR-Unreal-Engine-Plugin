@@ -1,0 +1,14 @@
+/NOLOGO
+/errorReport:prompt
+/MACHINE:x64
+/SUBSYSTEM:WINDOWS
+/DEF
+/NAME:"UE4Editor-ForceTubeVRForUE4.dll"
+/IGNORE:4221
+/NODEFAULTLIB
+"D:\Programmes\Epic Games\UE_4.19\Engine\Intermediate\Build\Win64\UE4Editor\Development\Engine\SharedPCH.Engine.h.obj"
+"C:\Users\pierr\OneDrive\Documents\Unreal Projects\p19c\Plugins\ForceTubeVRForUE4\Intermediate\Build\Win64\UE4Editor\Development\ForceTubeVRForUE4\Module.ForceTubeVRForUE4.cpp.obj"
+"C:\Users\pierr\OneDrive\Documents\Unreal Projects\p19c\Plugins\ForceTubeVRForUE4\Intermediate\Build\Win64\UE4Editor\Development\ForceTubeVRForUE4\Module.ForceTubeVRForUE4.gen.cpp.obj"
+"D:\Programmes\Epic Games\UE_4.19\Engine\Intermediate\Build\Win64\UE4Editor\Development\ForceTubeVRForUE4\PCLaunch.rc.res"
+"D:\Programmes\Epic Games\UE_4.19\Engine\Intermediate\Build\Win64\UE4Editor\Development\ModuleVersionResource.rc.inl.res"
+/OUT:"C:\Users\pierr\OneDrive\Documents\Unreal Projects\p19c\Plugins\ForceTubeVRForUE4\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-ForceTubeVRForUE4.lib"
