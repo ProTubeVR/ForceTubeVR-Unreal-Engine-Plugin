@@ -1,0 +1,15 @@
+{
+	"RemapUnityFiles": 
+	{
+		"Module.ForceTubeVRForUE4.cpp.obj": [
+			"ForceTubeVRForUE4.cpp.obj",
+			"ForceTubeVRFunctions.cpp.obj",
+			"PlayerControllerCppExample.cpp.obj"
+		],
+		"Module.ForceTubeVRForUE4.gen.cpp.obj": [
+			"ForceTubeVRForUE4.init.gen.cpp.obj",
+			"ForceTubeVRFunctions.gen.cpp.obj",
+			"PlayerControllerCppExample.gen.cpp.obj"
+		]
+	}
+}
