@@ -1,0 +1,8 @@
+/NOLOGO
+/errorReport:prompt
+/MACHINE:x64
+/SUBSYSTEM:WINDOWS
+"D:\Cpp16\Plugins\ForceTubeVRForUE4\Intermediate\Build\Win64\UE4\Development\ForceTubeVRForUE4\Module.ForceTubeVRForUE4.cpp.obj"
+"D:\Cpp16\Plugins\ForceTubeVRForUE4\Intermediate\Build\Win64\UE4\Development\ForceTubeVRForUE4\ForceTubeVRForUE4.generated.cpp.obj"
+"D:\Cpp16\Intermediate\Build\Win64\UE4\Development\ForceTubeVRForUE4\PCLaunch.rc.res"
+/OUT:"D:\Cpp16\Plugins\ForceTubeVRForUE4\Binaries\Win64\UE4-ForceTubeVRForUE4.lib"
