@@ -11,7 +11,7 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #endif
 #define FORCETUBEVRFORUE4_ForceTubeVRFunctions_generated_h
 
-#define Cpp14_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_20_RPC_WRAPPERS \
+#define p14c_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_24_RPC_WRAPPERS \
  \
 	DECLARE_FUNCTION(execGetBatteryLevel) \
 	{ \
@@ -44,9 +44,10 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 		P_GET_PROPERTY(UByteProperty,Z_Param_kickPower); \
 		P_GET_PROPERTY(UByteProperty,Z_Param_rumblePower); \
 		P_GET_PROPERTY(UFloatProperty,Z_Param_rumbleDuration); \
+		P_GET_PROPERTY(UByteProperty,Z_Param_channel); \
 		P_FINISH; \
 		P_NATIVE_BEGIN; \
-		UForceTubeVRFunctions::Shot(Z_Param_kickPower,Z_Param_rumblePower,Z_Param_rumbleDuration); \
+		UForceTubeVRFunctions::Shot(Z_Param_kickPower,Z_Param_rumblePower,Z_Param_rumbleDuration,ForceTubeVRChannel(Z_Param_channel)); \
 		P_NATIVE_END; \
 	} \
  \
@@ -54,23 +55,34 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 	{ \
 		P_GET_PROPERTY(UByteProperty,Z_Param_power); \
 		P_GET_PROPERTY(UFloatProperty,Z_Param_timeInSeconds); \
+		P_GET_PROPERTY(UByteProperty,Z_Param_channel); \
 		P_FINISH; \
 		P_NATIVE_BEGIN; \
-		UForceTubeVRFunctions::Rumble(Z_Param_power,Z_Param_timeInSeconds); \
+		UForceTubeVRFunctions::Rumble(Z_Param_power,Z_Param_timeInSeconds,ForceTubeVRChannel(Z_Param_channel)); \
 		P_NATIVE_END; \
 	} \
  \
 	DECLARE_FUNCTION(execKick) \
 	{ \
 		P_GET_PROPERTY(UByteProperty,Z_Param_power); \
+		P_GET_PROPERTY(UByteProperty,Z_Param_channel); \
 		P_FINISH; \
 		P_NATIVE_BEGIN; \
-		UForceTubeVRFunctions::Kick(Z_Param_power); \
+		UForceTubeVRFunctions::Kick(Z_Param_power,ForceTubeVRChannel(Z_Param_channel)); \
+		P_NATIVE_END; \
+	} \
+ \
+	DECLARE_FUNCTION(execInitAsync) \
+	{ \
+		P_GET_UBOOL(Z_Param_pistolsFirst); \
+		P_FINISH; \
+		P_NATIVE_BEGIN; \
+		UForceTubeVRFunctions::InitAsync(Z_Param_pistolsFirst); \
 		P_NATIVE_END; \
 	}
 
 
-#define Cpp14_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_20_RPC_WRAPPERS_NO_PURE_DECLS \
+#define p14c_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_24_RPC_WRAPPERS_NO_PURE_DECLS \
  \
 	DECLARE_FUNCTION(execGetBatteryLevel) \
 	{ \
@@ -103,9 +115,10 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 		P_GET_PROPERTY(UByteProperty,Z_Param_kickPower); \
 		P_GET_PROPERTY(UByteProperty,Z_Param_rumblePower); \
 		P_GET_PROPERTY(UFloatProperty,Z_Param_rumbleDuration); \
+		P_GET_PROPERTY(UByteProperty,Z_Param_channel); \
 		P_FINISH; \
 		P_NATIVE_BEGIN; \
-		UForceTubeVRFunctions::Shot(Z_Param_kickPower,Z_Param_rumblePower,Z_Param_rumbleDuration); \
+		UForceTubeVRFunctions::Shot(Z_Param_kickPower,Z_Param_rumblePower,Z_Param_rumbleDuration,ForceTubeVRChannel(Z_Param_channel)); \
 		P_NATIVE_END; \
 	} \
  \
@@ -113,23 +126,34 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 	{ \
 		P_GET_PROPERTY(UByteProperty,Z_Param_power); \
 		P_GET_PROPERTY(UFloatProperty,Z_Param_timeInSeconds); \
+		P_GET_PROPERTY(UByteProperty,Z_Param_channel); \
 		P_FINISH; \
 		P_NATIVE_BEGIN; \
-		UForceTubeVRFunctions::Rumble(Z_Param_power,Z_Param_timeInSeconds); \
+		UForceTubeVRFunctions::Rumble(Z_Param_power,Z_Param_timeInSeconds,ForceTubeVRChannel(Z_Param_channel)); \
 		P_NATIVE_END; \
 	} \
  \
 	DECLARE_FUNCTION(execKick) \
 	{ \
 		P_GET_PROPERTY(UByteProperty,Z_Param_power); \
+		P_GET_PROPERTY(UByteProperty,Z_Param_channel); \
 		P_FINISH; \
 		P_NATIVE_BEGIN; \
-		UForceTubeVRFunctions::Kick(Z_Param_power); \
+		UForceTubeVRFunctions::Kick(Z_Param_power,ForceTubeVRChannel(Z_Param_channel)); \
+		P_NATIVE_END; \
+	} \
+ \
+	DECLARE_FUNCTION(execInitAsync) \
+	{ \
+		P_GET_UBOOL(Z_Param_pistolsFirst); \
+		P_FINISH; \
+		P_NATIVE_BEGIN; \
+		UForceTubeVRFunctions::InitAsync(Z_Param_pistolsFirst); \
 		P_NATIVE_END; \
 	}
 
 
-#define Cpp14_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_20_INCLASS_NO_PURE_DECLS \
+#define p14c_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_24_INCLASS_NO_PURE_DECLS \
 	private: \
 	static void StaticRegisterNativesUForceTubeVRFunctions(); \
 	friend FORCETUBEVRFORUE4_API class UClass* Z_Construct_UClass_UForceTubeVRFunctions(); \
@@ -140,7 +164,7 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 	enum {IsIntrinsic=COMPILED_IN_INTRINSIC};
 
 
-#define Cpp14_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_20_INCLASS \
+#define p14c_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_24_INCLASS \
 	private: \
 	static void StaticRegisterNativesUForceTubeVRFunctions(); \
 	friend FORCETUBEVRFORUE4_API class UClass* Z_Construct_UClass_UForceTubeVRFunctions(); \
@@ -151,7 +175,7 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 	enum {IsIntrinsic=COMPILED_IN_INTRINSIC};
 
 
-#define Cpp14_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_20_STANDARD_CONSTRUCTORS \
+#define p14c_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_24_STANDARD_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	NO_API UForceTubeVRFunctions(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get()); \
 	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(UForceTubeVRFunctions) \
@@ -164,7 +188,7 @@ private: \
 public:
 
 
-#define Cpp14_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_20_ENHANCED_CONSTRUCTORS \
+#define p14c_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_24_ENHANCED_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	NO_API UForceTubeVRFunctions(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get()) : Super(ObjectInitializer) { }; \
 private: \
@@ -177,32 +201,41 @@ DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(UForceTubeVRFunctions); \
 	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(UForceTubeVRFunctions)
 
 
-#define Cpp14_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_20_PRIVATE_PROPERTY_OFFSET
-#define Cpp14_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_17_PROLOG
-#define Cpp14_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_20_GENERATED_BODY_LEGACY \
+#define p14c_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_24_PRIVATE_PROPERTY_OFFSET
+#define p14c_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_21_PROLOG
+#define p14c_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_24_GENERATED_BODY_LEGACY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	Cpp14_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_20_PRIVATE_PROPERTY_OFFSET \
-	Cpp14_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_20_RPC_WRAPPERS \
-	Cpp14_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_20_INCLASS \
-	Cpp14_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_20_STANDARD_CONSTRUCTORS \
+	p14c_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_24_PRIVATE_PROPERTY_OFFSET \
+	p14c_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_24_RPC_WRAPPERS \
+	p14c_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_24_INCLASS \
+	p14c_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_24_STANDARD_CONSTRUCTORS \
 public: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
 
-#define Cpp14_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_20_GENERATED_BODY \
+#define p14c_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_24_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	Cpp14_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_20_PRIVATE_PROPERTY_OFFSET \
-	Cpp14_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_20_RPC_WRAPPERS_NO_PURE_DECLS \
-	Cpp14_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_20_INCLASS_NO_PURE_DECLS \
-	Cpp14_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_20_ENHANCED_CONSTRUCTORS \
+	p14c_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_24_PRIVATE_PROPERTY_OFFSET \
+	p14c_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_24_RPC_WRAPPERS_NO_PURE_DECLS \
+	p14c_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_24_INCLASS_NO_PURE_DECLS \
+	p14c_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_24_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
 
 #undef CURRENT_FILE_ID
-#define CURRENT_FILE_ID Cpp14_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h
+#define CURRENT_FILE_ID p14c_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h
 
 
+#define FOREACH_ENUM_FORCETUBEVRCHANNEL(op) \
+	op(ForceTubeVRChannel::all) \
+	op(ForceTubeVRChannel::rifle) \
+	op(ForceTubeVRChannel::rifleButt) \
+	op(ForceTubeVRChannel::rifleBolt) \
+	op(ForceTubeVRChannel::pistol1) \
+	op(ForceTubeVRChannel::pistol2) \
+	op(ForceTubeVRChannel::other) \
+	op(ForceTubeVRChannel::vest) 
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

@@ -6,8 +6,8 @@
 /NAME:"UE4Editor-ForceTubeVRForUE4.dll"
 /IGNORE:4221
 /NODEFAULTLIB
-"C:\Users\pierr\OneDrive\Documents\Unreal Projects\QuestCpp20\Intermediate\Build\Win64\QuestCpp20Editor\Development\Engine\SharedPCH.Engine.h.obj"
-"C:\Users\pierr\OneDrive\Documents\Unreal Projects\QuestCpp20\Plugins\ForceTubeVRForUE4\Intermediate\Build\Win64\UE4Editor\Development\ForceTubeVRForUE4\Module.ForceTubeVRForUE4.cpp.obj"
-"C:\Users\pierr\OneDrive\Documents\Unreal Projects\QuestCpp20\Plugins\ForceTubeVRForUE4\Intermediate\Build\Win64\UE4Editor\Development\ForceTubeVRForUE4\Module.ForceTubeVRForUE4.gen.cpp.obj"
-"C:\Users\pierr\OneDrive\Documents\Unreal Projects\QuestCpp20\Plugins\ForceTubeVRForUE4\Intermediate\Build\Win64\UE4Editor\Development\ForceTubeVRForUE4\PCLaunch.rc.res"
-/OUT:"C:\Users\pierr\OneDrive\Documents\Unreal Projects\QuestCpp20\Plugins\ForceTubeVRForUE4\Intermediate\Build\Win64\UE4Editor\Development\ForceTubeVRForUE4\UE4Editor-ForceTubeVRForUE4.lib"
+"D:\Unreal Projects\q20c\Intermediate\Build\Win64\q20cEditor\Development\Engine\SharedPCH.Engine.h.obj"
+"D:\Unreal Projects\q20c\Plugins\ForceTubeVRForUE4\Intermediate\Build\Win64\UE4Editor\Development\ForceTubeVRForUE4\Module.ForceTubeVRForUE4.cpp.obj"
+"D:\Unreal Projects\q20c\Plugins\ForceTubeVRForUE4\Intermediate\Build\Win64\UE4Editor\Development\ForceTubeVRForUE4\Module.ForceTubeVRForUE4.gen.cpp.obj"
+"D:\Unreal Projects\q20c\Plugins\ForceTubeVRForUE4\Intermediate\Build\Win64\UE4Editor\Development\ForceTubeVRForUE4\PCLaunch.rc.res"
+/OUT:"D:\Unreal Projects\q20c\Plugins\ForceTubeVRForUE4\Intermediate\Build\Win64\UE4Editor\Development\ForceTubeVRForUE4\UE4Editor-ForceTubeVRForUE4.lib"

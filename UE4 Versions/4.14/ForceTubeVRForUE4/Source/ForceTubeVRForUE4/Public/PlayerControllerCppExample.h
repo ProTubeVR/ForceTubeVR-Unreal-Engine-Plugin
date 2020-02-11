@@ -20,8 +20,8 @@ class FORCETUBEVRFORUE4_API APlayerControllerCppExample : public APlayerControll
 		
 public:
 
+	void BeginPlay();
 	void Tick(float DeltaTime); //called each tick by UE4
-	void EndPlay(const EEndPlayReason::Type EndPlayReason); //called on quit by UE4
 
 private:
 
@@ -33,5 +33,4 @@ private:
 	void updateRumble();
 	void updateShoot();
 	void updateActiveResearch();
-	void updateAutoShot();
 };

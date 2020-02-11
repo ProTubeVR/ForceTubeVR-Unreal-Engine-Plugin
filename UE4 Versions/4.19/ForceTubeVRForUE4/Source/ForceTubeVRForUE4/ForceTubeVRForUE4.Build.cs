@@ -63,14 +63,14 @@ public class ForceTubeVRForUE4 : ModuleRules
             PublicIncludePathModuleNames.Add("Launch");
             //ReceiptProperties.Add("$(ProjectDir)/Plugins/ForceTubeVRForUE4/Source/ForceTubeVRForUE4/ForceTubeVR_APL.xml");
             //RuntimeDependencies.Add("$(ProjectDir)/Plugins/ForceTubeVRForUE4/Source/ForceTubeVRForUE4/ForceTubeVR_APL.xml");
-            AdditionalPropertiesForReceipt.Add("AndroidPlugin", Path.Combine(ModuleDirectory, "ForceTubeVR_APL.xml")); //test actuel (marche presque quand on gerte tout)
+            AdditionalPropertiesForReceipt.Add(new ReceiptProperty("AndroidPlugin", Path.Combine(ModuleDirectory, "ForceTubeVR_APL.xml"))); //test actuel (marche presque quand on gerte tout)
             //AdditionalPropertiesForReceipt.Add(new ReceiptProperty("AndroidPluginAar", Path.Combine(PluginPath, "../../Android/ForceTubeVR_API_Android.aar")));
             //AdditionalPropertiesForReceipt.Add(new ReceiptProperty("AndroidPluginJar", Path.Combine(PluginPath, "../../Android/ForceTubeVR_API_Android.jar")));
         } else {
-            //RuntimeDependencies.Add(new RuntimeDependency("$(ProjectDir)/Plugins/ForceTubeVRForUE4/ForceTubeVR_API_x32.dll"));
-            //RuntimeDependencies.Add(new RuntimeDependency("$(ProjectDir)/Plugins/ForceTubeVRForUE4/ForceTubeVR_API_x64.dll"));
-            RuntimeDependencies.Add("$(ProjectDir)/Plugins/ForceTubeVRForUE4/ForceTubeVR_API_x32.dll");
-            RuntimeDependencies.Add("$(ProjectDir)/Plugins/ForceTubeVRForUE4/ForceTubeVR_API_x64.dll");
+            RuntimeDependencies.Add(new RuntimeDependency("$(ProjectDir)/Plugins/ForceTubeVRForUE4/ForceTubeVR_API_x32.dll"));
+            RuntimeDependencies.Add(new RuntimeDependency("$(ProjectDir)/Plugins/ForceTubeVRForUE4/ForceTubeVR_API_x64.dll"));
+            //RuntimeDependencies.Add("$(ProjectDir)/Plugins/ForceTubeVRForUE4/ForceTubeVR_API_x32.dll");
+            //RuntimeDependencies.Add("$(ProjectDir)/Plugins/ForceTubeVRForUE4/ForceTubeVR_API_x64.dll");
         }
     }
 }

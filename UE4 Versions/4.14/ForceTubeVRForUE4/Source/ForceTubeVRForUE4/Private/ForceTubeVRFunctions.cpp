@@ -5,21 +5,25 @@
 #include "ForceTubeVRFunctions.h"
 
 
-typedef void(*_Kick)(uint8 power); // Declare a method to store the DLL method Kick. 
-typedef void(*_Rumble)(uint8 power, float timeInSeconds); // Declare a method to store the DLL method Rumble. 
-typedef void(*_Shot)(uint8 kickPower, uint8 rumblePower, float rumbleDuration); // Declare a method to store the DLL method Kick. 
+typedef void(*_InitRifle)(); // Declare a method to store the DLL method InitRifle. 
+typedef void(*_InitPistol)(); // Declare a method to store the DLL method InitPistol. 
+typedef void(*_Kick)(uint8 power, ForceTubeVRChannel channel); // Declare a method to store the DLL method Kick. 
+typedef void(*_Rumble)(uint8 power, float timeInSeconds, ForceTubeVRChannel channel); // Declare a method to store the DLL method Rumble. 
+typedef void(*_Shot)(uint8 kickPower, uint8 rumblePower, float rumbleDuration, ForceTubeVRChannel channel); // Declare a method to store the DLL method Kick. 
 typedef void(*_SetActiveResearch)(bool active); // Declare a method to store the DLL method SetActive. 
-typedef void(*_InitAsync)(); // Declare a method to store the DLL method SetActive. 
 typedef uint8(*_TempoToKickPower)(float tempo); // Declare a method to store the DLL method TempoToKickPower.
 typedef uint8(*_GetBatteryLevel)(); // Declare a method to store the DLL method GetBatteryLevel.
 
-void *v_dllHandle;
 
+void* UForceTubeVRFunctions::v_dllHandle = NULL;
+
+
+_InitRifle m_InitAsyncRifle;
+_InitPistol m_InitAsyncPistols;
 _Kick m_KickFromDll;
 _Rumble m_RumbleFromDll;
 _Shot m_ShotFromDll;
 _SetActiveResearch m_SetActiveFromDll;
-_InitAsync m_InitAsyncFromDll;
 _TempoToKickPower m_TempoToKickPowerFromDll;
 _GetBatteryLevel m_GetBatteryLevelFromDll;
 
@@ -27,32 +31,33 @@ _GetBatteryLevel m_GetBatteryLevelFromDll;
 #pragma region Load DLL
 
 bool UForceTubeVRFunctions::LoadForceTubeVR() {
-	
 	if (!importDLL()) {
 		return false;
 	}
-	if (!importMethodInitAsync()) {
+	if (!importMethod<_InitRifle>("InitRifle", &m_InitAsyncRifle)) {
 		return false;
 	}
-	if (!importMethodKick()) {
+	if (!importMethod<_InitPistol>("InitPistol", &m_InitAsyncPistols)) {
 		return false;
 	}
-	if (!importMethodRumble()) {
+	if (!importMethod<_Kick>("KickChannel", &m_KickFromDll)) {
 		return false;
 	}
-	if (!importMethodShot()) {
+	if (!importMethod<_Rumble>("RumbleChannel", &m_RumbleFromDll)) {
 		return false;
 	}
-	if (!importMethodSetActive()) {
+	if (!importMethod<_Shot>("ShotChannel", &m_ShotFromDll)) {
 		return false;
 	}
-	if (!importMethodTempoToKickPower()) {
+	if (!importMethod<_SetActiveResearch>("SetActive", &m_SetActiveFromDll)) {
 		return false;
 	}
-	if (!importMethodGetBatteryLevel()) {
+	if (!importMethod<_TempoToKickPower>("TempoToKickPower", &m_TempoToKickPowerFromDll)) {
 		return false;
 	}
-	InitAsync();
+	if (!importMethod<_GetBatteryLevel>("GetBatteryLevel", &m_GetBatteryLevelFromDll)) {
+		return false;
+	}
 	return true;
 }
 
@@ -74,120 +79,48 @@ bool UForceTubeVRFunctions::importDLL() {
 	return false;	// Return an error.
 }
 
+template<class Signature> bool UForceTubeVRFunctions::importMethod(FString procName, Signature* methodSocket) {
+	if (v_dllHandle != NULL) {
+		*methodSocket = NULL;
+		*methodSocket = (Signature)FPlatformProcess::GetDllExport(v_dllHandle, *procName);
+		if (*methodSocket != NULL) {
+			return true;
+		}
+	}
+	return false;
+}
+
 #pragma endregion Load DLL
-
-#pragma region Import Methods
-
-bool UForceTubeVRFunctions::importMethodInitAsync() {
-	if (v_dllHandle != NULL) {
-		m_InitAsyncFromDll = NULL;
-		FString procName = "InitAsync";	// Needs to be the exact name of the DLL method. 
-		m_InitAsyncFromDll = (_InitAsync)FPlatformProcess::GetDllExport(v_dllHandle, *procName);
-		if (m_InitAsyncFromDll != NULL) {
-			return true;
-		}
-	}
-	return false;
-}
-
-// Imports the method getInvertedBool from the DLL. 
-bool UForceTubeVRFunctions::importMethodKick() {
-	if (v_dllHandle != NULL) {
-		m_KickFromDll = NULL;
-		FString procName = "Kick";	// Needs to be the exact name of the DLL method. 
-		m_KickFromDll = (_Kick)FPlatformProcess::GetDllExport(v_dllHandle, *procName);
-		if (m_KickFromDll != NULL) {
-			return true;
-		}
-	}
-	return false;	// Return an error. 
-}
-
-bool UForceTubeVRFunctions::importMethodRumble() {
-	if (v_dllHandle != NULL) {
-		m_RumbleFromDll = NULL;
-		FString procName = "Rumble";	// Needs to be the exact name of the DLL method. 
-		m_RumbleFromDll = (_Rumble)FPlatformProcess::GetDllExport(v_dllHandle, *procName);
-		if (m_RumbleFromDll != NULL) {
-			return true;
-		}
-	}
-	return false;	// Return an error.
-}
-
-bool UForceTubeVRFunctions::importMethodShot() {
-	if (v_dllHandle != NULL) {
-		m_ShotFromDll = NULL;
-		FString procName = "Shot";	// Needs to be the exact name of the DLL method. 
-		m_ShotFromDll = (_Shot)FPlatformProcess::GetDllExport(v_dllHandle, *procName);
-		if (m_ShotFromDll != NULL) {
-			return true;
-		}
-	}
-	return false;
-}
-
-bool UForceTubeVRFunctions::importMethodSetActive() {
-	if (v_dllHandle != NULL) {
-		m_SetActiveFromDll = NULL;
-		FString procName = "SetActive";	// Needs to be the exact name of the DLL method. 
-		m_SetActiveFromDll = (_SetActiveResearch)FPlatformProcess::GetDllExport(v_dllHandle, *procName);
-		if (m_SetActiveFromDll != NULL) {
-			return true;
-		}
-	}
-	return false;
-}
-
-bool UForceTubeVRFunctions::importMethodTempoToKickPower() {
-	if (v_dllHandle != NULL) {
-		m_TempoToKickPowerFromDll = NULL;
-		FString procName = "TempoToKickPower";	// Needs to be the exact name of the DLL method. 
-				m_TempoToKickPowerFromDll = (_TempoToKickPower)FPlatformProcess::GetDllExport(v_dllHandle, *procName);
-		if (m_TempoToKickPowerFromDll != NULL) {
-			return true;
-		}
-	}
-	return false;
-}
-
-bool UForceTubeVRFunctions::importMethodGetBatteryLevel() {
-	if (v_dllHandle != NULL) {
-		m_GetBatteryLevelFromDll = NULL;
-		FString procName = "GetBatteryLevel";	// Needs to be the exact name of the DLL method. 
-		m_GetBatteryLevelFromDll = (_GetBatteryLevel)FPlatformProcess::GetDllExport(v_dllHandle, *procName);
-		if (m_GetBatteryLevelFromDll != NULL) {
-			return true;
-		}
-	}
-	return false;
-}
-
-#pragma endregion Import Methods
 
 #pragma region Method Calls
 
-void UForceTubeVRFunctions::InitAsync() {
-	if (m_InitAsyncFromDll != NULL) {
-		m_InitAsyncFromDll();
-	}
+void UForceTubeVRFunctions::InitAsync(bool pistolsFirst) {
+	if (pistolsFirst) {
+		if (m_InitAsyncPistols != NULL) {
+			m_InitAsyncPistols();
+		}
+	} else {
+		if (m_InitAsyncRifle != NULL) {
+			m_InitAsyncRifle();
+		}
+	}	
 }
 
-void UForceTubeVRFunctions::Kick(uint8 power) {
+void UForceTubeVRFunctions::Kick(uint8 power, ForceTubeVRChannel channel) {
 	if (m_KickFromDll != NULL) {
-		m_KickFromDll(power); // Call the DLL method with arguments corresponding to the exact signature and return type of the method. 
+		m_KickFromDll(power, channel); // Call the DLL method with arguments corresponding to the exact signature and return type of the method. 
 	}
 }
 
-void UForceTubeVRFunctions::Rumble(uint8 power, float timeInSeconds) {
+void UForceTubeVRFunctions::Rumble(uint8 power, float timeInSeconds, ForceTubeVRChannel channel) {
 	if (m_RumbleFromDll != NULL) {
-		m_RumbleFromDll(power, timeInSeconds); // Call the DLL method with arguments corresponding to the exact signature and return type of the method.
+		m_RumbleFromDll(power, timeInSeconds, channel); // Call the DLL method with arguments corresponding to the exact signature and return type of the method.
 	}
 }
 
-void UForceTubeVRFunctions::Shot(uint8 kickPower, uint8 rumblePower, float rumbleDuration) {
+void UForceTubeVRFunctions::Shot(uint8 kickPower, uint8 rumblePower, float rumbleDuration, ForceTubeVRChannel channel) {
 	if (m_ShotFromDll != NULL) {
-		m_ShotFromDll(kickPower, rumblePower, rumbleDuration); // Call the DLL method with arguments corresponding to the exact signature and return type of the method.
+		m_ShotFromDll(kickPower, rumblePower, rumbleDuration, channel); // Call the DLL method with arguments corresponding to the exact signature and return type of the method.
 	}
 }
 
@@ -208,8 +141,7 @@ uint8 UForceTubeVRFunctions::TempoToKickPower(float tempo) {
 uint8 UForceTubeVRFunctions::GetBatteryLevel() {
 	if (m_GetBatteryLevelFromDll != NULL) {
 		return m_GetBatteryLevelFromDll();
-	}
-	else {
+	} else {
 		return 0;
 	}
 }
@@ -220,13 +152,15 @@ uint8 UForceTubeVRFunctions::GetBatteryLevel() {
 
 void UForceTubeVRFunctions::FreeDLL() {
 	if (v_dllHandle != NULL) {
-		m_InitAsyncFromDll = NULL;
+		m_InitAsyncRifle = NULL;
+		m_InitAsyncPistols = NULL;
 		m_KickFromDll = NULL;
 		m_RumbleFromDll = NULL;
 		m_ShotFromDll = NULL;
 		m_SetActiveFromDll = NULL;
 		m_TempoToKickPowerFromDll = NULL;
-		FPlatformProcess::FreeDllHandle(v_dllHandle); v_dllHandle = NULL;
+		FPlatformProcess::FreeDllHandle(v_dllHandle);
+		v_dllHandle = NULL;
 	}
 }
 

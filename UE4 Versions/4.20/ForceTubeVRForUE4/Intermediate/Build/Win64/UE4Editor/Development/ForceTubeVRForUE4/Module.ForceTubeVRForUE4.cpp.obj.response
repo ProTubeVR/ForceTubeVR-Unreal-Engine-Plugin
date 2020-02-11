@@ -24,7 +24,7 @@
 /wd4838
 /we4668
 /I .
-/I "C:\Users\pierr\OneDrive\Documents\Unreal Projects\QuestCpp20\Plugins\ForceTubeVRForUE4\Source\ForceTubeVRForUE4\Private"
+/I "D:\Unreal Projects\q20c\Plugins\ForceTubeVRForUE4\Source\ForceTubeVRForUE4\Private"
 /I ..\Intermediate\Build\Win64\UE4Editor\Inc\CoreUObject
 /I Runtime
 /I Runtime\CoreUObject\Public
@@ -402,22 +402,22 @@
 /I ThirdParty
 /I ThirdParty\libSampleRate\Public
 /I ThirdParty\libSampleRate
-/I "C:\Users\pierr\OneDrive\Documents\Unreal Projects\QuestCpp20\Plugins\ForceTubeVRForUE4\Intermediate\Build\Win64\UE4Editor\Inc\ForceTubeVRForUE4"
-/I "C:\Users\pierr\OneDrive\Documents\Unreal Projects\QuestCpp20\Plugins\ForceTubeVRForUE4\Source"
-/I "C:\Users\pierr\OneDrive\Documents\Unreal Projects\QuestCpp20\Plugins\ForceTubeVRForUE4\Source\ForceTubeVRForUE4\Public"
-/I "C:\Users\pierr\OneDrive\Documents\Unreal Projects\QuestCpp20\Plugins\ForceTubeVRForUE4\Source\ForceTubeVRForUE4"
-/I "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE"
+/I "D:\Unreal Projects\q20c\Plugins\ForceTubeVRForUE4\Intermediate\Build\Win64\UE4Editor\Inc\ForceTubeVRForUE4"
+/I "D:\Unreal Projects\q20c\Plugins\ForceTubeVRForUE4\Source"
+/I "D:\Unreal Projects\q20c\Plugins\ForceTubeVRForUE4\Source\ForceTubeVRForUE4\Public"
+/I "D:\Unreal Projects\q20c\Plugins\ForceTubeVRForUE4\Source\ForceTubeVRForUE4"
+/I "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Tools\MSVC\14.16.27023\INCLUDE"
 /I "C:\Program Files (x86)\Windows Kits\NETFXSDK\4.6\include\um"
 /I "C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\ucrt"
 /I "C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\shared"
 /I "C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\um"
 /I "C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\winrt"
-/FI"C:\Users\pierr\OneDrive\Documents\Unreal Projects\QuestCpp20\Intermediate\Build\Win64\QuestCpp20Editor\Development\Engine\SharedPCH.Engine.h"
-/Yu"C:\Users\pierr\OneDrive\Documents\Unreal Projects\QuestCpp20\Intermediate\Build\Win64\QuestCpp20Editor\Development\Engine\SharedPCH.Engine.h"
-/Fp"C:\Users\pierr\OneDrive\Documents\Unreal Projects\QuestCpp20\Intermediate\Build\Win64\QuestCpp20Editor\Development\Engine\SharedPCH.Engine.h.pch"
-"C:\Users\pierr\OneDrive\Documents\Unreal Projects\QuestCpp20\Plugins\ForceTubeVRForUE4\Intermediate\Build\Win64\UE4Editor\Development\ForceTubeVRForUE4\Module.ForceTubeVRForUE4.cpp"
-/FI"C:\Users\pierr\OneDrive\Documents\Unreal Projects\QuestCpp20\Plugins\ForceTubeVRForUE4\Intermediate\Build\Win64\UE4Editor\Development\ForceTubeVRForUE4\Definitions.ForceTubeVRForUE4.h"
-/Fo"C:\Users\pierr\OneDrive\Documents\Unreal Projects\QuestCpp20\Plugins\ForceTubeVRForUE4\Intermediate\Build\Win64\UE4Editor\Development\ForceTubeVRForUE4\Module.ForceTubeVRForUE4.cpp.obj"
+/FI"D:\Unreal Projects\q20c\Intermediate\Build\Win64\q20cEditor\Development\Engine\SharedPCH.Engine.h"
+/Yu"D:\Unreal Projects\q20c\Intermediate\Build\Win64\q20cEditor\Development\Engine\SharedPCH.Engine.h"
+/Fp"D:\Unreal Projects\q20c\Intermediate\Build\Win64\q20cEditor\Development\Engine\SharedPCH.Engine.h.pch"
+"D:\Unreal Projects\q20c\Plugins\ForceTubeVRForUE4\Intermediate\Build\Win64\UE4Editor\Development\ForceTubeVRForUE4\Module.ForceTubeVRForUE4.cpp"
+/FI"D:\Unreal Projects\q20c\Plugins\ForceTubeVRForUE4\Intermediate\Build\Win64\UE4Editor\Development\ForceTubeVRForUE4\Definitions.ForceTubeVRForUE4.h"
+/Fo"D:\Unreal Projects\q20c\Plugins\ForceTubeVRForUE4\Intermediate\Build\Win64\UE4Editor\Development\ForceTubeVRForUE4\Module.ForceTubeVRForUE4.cpp.obj"
 /TP
 /GR-
 /W4

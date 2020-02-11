@@ -19,7 +19,7 @@ void FForceTubeVRForUE4Module::StartupModule()
 
 void FForceTubeVRForUE4Module::ShutdownModule()
 {
-	UForceTubeVRFunctions::Rumble(0, 0.0f);
+	UForceTubeVRFunctions::Rumble(0, 0.0f, ForceTubeVRChannel::all);
 	UForceTubeVRFunctions::FreeDLL();
 }
 

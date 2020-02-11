@@ -10,16 +10,29 @@
 #include "ForceTubeVRForUE4.generated.dep.h"
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 void EmptyLinkFunctionForGeneratedCode1ForceTubeVRForUE4() {}
+static class UEnum* ForceTubeVRChannel_StaticEnum()
+{
+	extern FORCETUBEVRFORUE4_API class UPackage* Z_Construct_UPackage__Script_ForceTubeVRForUE4();
+	static class UEnum* Singleton = NULL;
+	if (!Singleton)
+	{
+		extern FORCETUBEVRFORUE4_API class UEnum* Z_Construct_UEnum_ForceTubeVRForUE4_ForceTubeVRChannel();
+		Singleton = GetStaticEnum(Z_Construct_UEnum_ForceTubeVRForUE4_ForceTubeVRChannel, Z_Construct_UPackage__Script_ForceTubeVRForUE4(), TEXT("ForceTubeVRChannel"));
+	}
+	return Singleton;
+}
+static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_ForceTubeVRChannel(ForceTubeVRChannel_StaticEnum, TEXT("/Script/ForceTubeVRForUE4"), TEXT("ForceTubeVRChannel"), false, nullptr, nullptr);
 	void UForceTubeVRFunctions::StaticRegisterNativesUForceTubeVRFunctions()
 	{
 		FNativeFunctionRegistrar::RegisterFunction(UForceTubeVRFunctions::StaticClass(), "GetBatteryLevel",(Native)&UForceTubeVRFunctions::execGetBatteryLevel);
+		FNativeFunctionRegistrar::RegisterFunction(UForceTubeVRFunctions::StaticClass(), "InitAsync",(Native)&UForceTubeVRFunctions::execInitAsync);
 		FNativeFunctionRegistrar::RegisterFunction(UForceTubeVRFunctions::StaticClass(), "Kick",(Native)&UForceTubeVRFunctions::execKick);
 		FNativeFunctionRegistrar::RegisterFunction(UForceTubeVRFunctions::StaticClass(), "Rumble",(Native)&UForceTubeVRFunctions::execRumble);
 		FNativeFunctionRegistrar::RegisterFunction(UForceTubeVRFunctions::StaticClass(), "SetActiveResearch",(Native)&UForceTubeVRFunctions::execSetActiveResearch);
 		FNativeFunctionRegistrar::RegisterFunction(UForceTubeVRFunctions::StaticClass(), "Shot",(Native)&UForceTubeVRFunctions::execShot);
 		FNativeFunctionRegistrar::RegisterFunction(UForceTubeVRFunctions::StaticClass(), "TempoToKickPower",(Native)&UForceTubeVRFunctions::execTempoToKickPower);
 	}
-	IMPLEMENT_CLASS(UForceTubeVRFunctions, 82038085);
+	IMPLEMENT_CLASS(UForceTubeVRFunctions, 2991108591);
 	void APlayerControllerCppExample::StaticRegisterNativesAPlayerControllerCppExample()
 	{
 	}
@@ -29,7 +42,9 @@ void EmptyLinkFunctionForGeneratedCode1ForceTubeVRForUE4() {}
 	ENGINE_API class UClass* Z_Construct_UClass_UBlueprintFunctionLibrary();
 	ENGINE_API class UClass* Z_Construct_UClass_APlayerController();
 
+	FORCETUBEVRFORUE4_API class UEnum* Z_Construct_UEnum_ForceTubeVRForUE4_ForceTubeVRChannel();
 	FORCETUBEVRFORUE4_API class UFunction* Z_Construct_UFunction_UForceTubeVRFunctions_GetBatteryLevel();
+	FORCETUBEVRFORUE4_API class UFunction* Z_Construct_UFunction_UForceTubeVRFunctions_InitAsync();
 	FORCETUBEVRFORUE4_API class UFunction* Z_Construct_UFunction_UForceTubeVRFunctions_Kick();
 	FORCETUBEVRFORUE4_API class UFunction* Z_Construct_UFunction_UForceTubeVRFunctions_Rumble();
 	FORCETUBEVRFORUE4_API class UFunction* Z_Construct_UFunction_UForceTubeVRFunctions_SetActiveResearch();
@@ -40,6 +55,35 @@ void EmptyLinkFunctionForGeneratedCode1ForceTubeVRForUE4() {}
 	FORCETUBEVRFORUE4_API class UClass* Z_Construct_UClass_APlayerControllerCppExample_NoRegister();
 	FORCETUBEVRFORUE4_API class UClass* Z_Construct_UClass_APlayerControllerCppExample();
 	FORCETUBEVRFORUE4_API class UPackage* Z_Construct_UPackage__Script_ForceTubeVRForUE4();
+	UEnum* Z_Construct_UEnum_ForceTubeVRForUE4_ForceTubeVRChannel()
+	{
+		UPackage* Outer=Z_Construct_UPackage__Script_ForceTubeVRForUE4();
+		extern uint32 Get_Z_Construct_UEnum_ForceTubeVRForUE4_ForceTubeVRChannel_CRC();
+		static UEnum* ReturnEnum = FindExistingEnumIfHotReloadOrDynamic(Outer, TEXT("ForceTubeVRChannel"), 0, Get_Z_Construct_UEnum_ForceTubeVRForUE4_ForceTubeVRChannel_CRC(), false);
+		if (!ReturnEnum)
+		{
+			ReturnEnum = new(EC_InternalUseOnlyConstructor, Outer, TEXT("ForceTubeVRChannel"), RF_Public|RF_Transient|RF_MarkAsNative) UEnum(FObjectInitializer());
+			TArray<TPair<FName, uint8>> EnumNames;
+			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("ForceTubeVRChannel::all")), 0));
+			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("ForceTubeVRChannel::rifle")), 1));
+			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("ForceTubeVRChannel::rifleButt")), 2));
+			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("ForceTubeVRChannel::rifleBolt")), 3));
+			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("ForceTubeVRChannel::pistol1")), 4));
+			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("ForceTubeVRChannel::pistol2")), 5));
+			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("ForceTubeVRChannel::other")), 6));
+			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("ForceTubeVRChannel::vest")), 7));
+			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("ForceTubeVRChannel::ForceTubeVRChannel_MAX")), 8));
+			ReturnEnum->SetEnums(EnumNames, UEnum::ECppForm::EnumClass);
+			ReturnEnum->CppType = TEXT("ForceTubeVRChannel");
+#if WITH_METADATA
+			UMetaData* MetaData = ReturnEnum->GetOutermost()->GetMetaData();
+			MetaData->SetValue(ReturnEnum, TEXT("BlueprintType"), TEXT("true"));
+			MetaData->SetValue(ReturnEnum, TEXT("ModuleRelativePath"), TEXT("Public/ForceTubeVRFunctions.h"));
+#endif
+		}
+		return ReturnEnum;
+	}
+	uint32 Get_Z_Construct_UEnum_ForceTubeVRForUE4_ForceTubeVRChannel_CRC() { return 787625078U; }
 	UFunction* Z_Construct_UFunction_UForceTubeVRFunctions_GetBatteryLevel()
 	{
 		struct ForceTubeVRFunctions_eventGetBatteryLevel_Parms
@@ -63,23 +107,51 @@ void EmptyLinkFunctionForGeneratedCode1ForceTubeVRForUE4() {}
 		}
 		return ReturnFunction;
 	}
+	UFunction* Z_Construct_UFunction_UForceTubeVRFunctions_InitAsync()
+	{
+		struct ForceTubeVRFunctions_eventInitAsync_Parms
+		{
+			bool pistolsFirst;
+		};
+		UObject* Outer=Z_Construct_UClass_UForceTubeVRFunctions();
+		static UFunction* ReturnFunction = NULL;
+		if (!ReturnFunction)
+		{
+			ReturnFunction = new(EC_InternalUseOnlyConstructor, Outer, TEXT("InitAsync"), RF_Public|RF_Transient|RF_MarkAsNative) UFunction(FObjectInitializer(), NULL, 0x04022401, 65535, sizeof(ForceTubeVRFunctions_eventInitAsync_Parms));
+			CPP_BOOL_PROPERTY_BITMASK_STRUCT(pistolsFirst, ForceTubeVRFunctions_eventInitAsync_Parms, bool);
+			UProperty* NewProp_pistolsFirst = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("pistolsFirst"), RF_Public|RF_Transient|RF_MarkAsNative) UBoolProperty(FObjectInitializer(), EC_CppProperty, CPP_BOOL_PROPERTY_OFFSET(pistolsFirst, ForceTubeVRFunctions_eventInitAsync_Parms), 0x0010000000000080, CPP_BOOL_PROPERTY_BITMASK(pistolsFirst, ForceTubeVRFunctions_eventInitAsync_Parms), sizeof(bool), true);
+			ReturnFunction->Bind();
+			ReturnFunction->StaticLink();
+#if WITH_METADATA
+			UMetaData* MetaData = ReturnFunction->GetOutermost()->GetMetaData();
+			MetaData->SetValue(ReturnFunction, TEXT("Category"), TEXT("ForceTubeVR"));
+			MetaData->SetValue(ReturnFunction, TEXT("CPP_Default_pistolsFirst"), TEXT("false"));
+			MetaData->SetValue(ReturnFunction, TEXT("ModuleRelativePath"), TEXT("Public/ForceTubeVRFunctions.h"));
+			MetaData->SetValue(ReturnFunction, TEXT("ToolTip"), TEXT("True = load the two first ForceTubeVRs found in the rifle butt and rifle bolt channels, false = load the two first ForceTubeVRs found in the pistol1 and pistol2 channels"));
+#endif
+		}
+		return ReturnFunction;
+	}
 	UFunction* Z_Construct_UFunction_UForceTubeVRFunctions_Kick()
 	{
 		struct ForceTubeVRFunctions_eventKick_Parms
 		{
 			uint8 power;
+			ForceTubeVRChannel channel;
 		};
 		UObject* Outer=Z_Construct_UClass_UForceTubeVRFunctions();
 		static UFunction* ReturnFunction = NULL;
 		if (!ReturnFunction)
 		{
 			ReturnFunction = new(EC_InternalUseOnlyConstructor, Outer, TEXT("Kick"), RF_Public|RF_Transient|RF_MarkAsNative) UFunction(FObjectInitializer(), NULL, 0x04022401, 65535, sizeof(ForceTubeVRFunctions_eventKick_Parms));
+			UProperty* NewProp_channel = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("channel"), RF_Public|RF_Transient|RF_MarkAsNative) UByteProperty(CPP_PROPERTY_BASE(channel, ForceTubeVRFunctions_eventKick_Parms), 0x0010000000000080, Z_Construct_UEnum_ForceTubeVRForUE4_ForceTubeVRChannel());
 			UProperty* NewProp_power = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("power"), RF_Public|RF_Transient|RF_MarkAsNative) UByteProperty(CPP_PROPERTY_BASE(power, ForceTubeVRFunctions_eventKick_Parms), 0x0010000000000080);
 			ReturnFunction->Bind();
 			ReturnFunction->StaticLink();
 #if WITH_METADATA
 			UMetaData* MetaData = ReturnFunction->GetOutermost()->GetMetaData();
 			MetaData->SetValue(ReturnFunction, TEXT("Category"), TEXT("ForceTubeVR"));
+			MetaData->SetValue(ReturnFunction, TEXT("CPP_Default_channel"), TEXT("rifle"));
 			MetaData->SetValue(ReturnFunction, TEXT("ModuleRelativePath"), TEXT("Public/ForceTubeVRFunctions.h"));
 			MetaData->SetValue(ReturnFunction, TEXT("ToolTip"), TEXT("0 = no power, 255 = max power, this function is linear"));
 #endif
@@ -92,12 +164,14 @@ void EmptyLinkFunctionForGeneratedCode1ForceTubeVRForUE4() {}
 		{
 			uint8 power;
 			float timeInSeconds;
+			ForceTubeVRChannel channel;
 		};
 		UObject* Outer=Z_Construct_UClass_UForceTubeVRFunctions();
 		static UFunction* ReturnFunction = NULL;
 		if (!ReturnFunction)
 		{
 			ReturnFunction = new(EC_InternalUseOnlyConstructor, Outer, TEXT("Rumble"), RF_Public|RF_Transient|RF_MarkAsNative) UFunction(FObjectInitializer(), NULL, 0x04022401, 65535, sizeof(ForceTubeVRFunctions_eventRumble_Parms));
+			UProperty* NewProp_channel = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("channel"), RF_Public|RF_Transient|RF_MarkAsNative) UByteProperty(CPP_PROPERTY_BASE(channel, ForceTubeVRFunctions_eventRumble_Parms), 0x0010000000000080, Z_Construct_UEnum_ForceTubeVRForUE4_ForceTubeVRChannel());
 			UProperty* NewProp_timeInSeconds = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("timeInSeconds"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(timeInSeconds, ForceTubeVRFunctions_eventRumble_Parms), 0x0010000000000080);
 			UProperty* NewProp_power = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("power"), RF_Public|RF_Transient|RF_MarkAsNative) UByteProperty(CPP_PROPERTY_BASE(power, ForceTubeVRFunctions_eventRumble_Parms), 0x0010000000000080);
 			ReturnFunction->Bind();
@@ -105,6 +179,7 @@ void EmptyLinkFunctionForGeneratedCode1ForceTubeVRForUE4() {}
 #if WITH_METADATA
 			UMetaData* MetaData = ReturnFunction->GetOutermost()->GetMetaData();
 			MetaData->SetValue(ReturnFunction, TEXT("Category"), TEXT("ForceTubeVR"));
+			MetaData->SetValue(ReturnFunction, TEXT("CPP_Default_channel"), TEXT("rifle"));
 			MetaData->SetValue(ReturnFunction, TEXT("ModuleRelativePath"), TEXT("Public/ForceTubeVRFunctions.h"));
 			MetaData->SetValue(ReturnFunction, TEXT("ToolTip"), TEXT("For power : 0 = no power, 255 = max power, if power <= 126, only the little motor is activated, this function is linear ; for timeInSeconds : 0.0f seconds is a special command that make the ForceTubeVR never stop the rumble"));
 #endif
@@ -142,12 +217,14 @@ void EmptyLinkFunctionForGeneratedCode1ForceTubeVRForUE4() {}
 			uint8 kickPower;
 			uint8 rumblePower;
 			float rumbleDuration;
+			ForceTubeVRChannel channel;
 		};
 		UObject* Outer=Z_Construct_UClass_UForceTubeVRFunctions();
 		static UFunction* ReturnFunction = NULL;
 		if (!ReturnFunction)
 		{
 			ReturnFunction = new(EC_InternalUseOnlyConstructor, Outer, TEXT("Shot"), RF_Public|RF_Transient|RF_MarkAsNative) UFunction(FObjectInitializer(), NULL, 0x04022401, 65535, sizeof(ForceTubeVRFunctions_eventShot_Parms));
+			UProperty* NewProp_channel = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("channel"), RF_Public|RF_Transient|RF_MarkAsNative) UByteProperty(CPP_PROPERTY_BASE(channel, ForceTubeVRFunctions_eventShot_Parms), 0x0010000000000080, Z_Construct_UEnum_ForceTubeVRForUE4_ForceTubeVRChannel());
 			UProperty* NewProp_rumbleDuration = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("rumbleDuration"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(rumbleDuration, ForceTubeVRFunctions_eventShot_Parms), 0x0010000000000080);
 			UProperty* NewProp_rumblePower = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("rumblePower"), RF_Public|RF_Transient|RF_MarkAsNative) UByteProperty(CPP_PROPERTY_BASE(rumblePower, ForceTubeVRFunctions_eventShot_Parms), 0x0010000000000080);
 			UProperty* NewProp_kickPower = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("kickPower"), RF_Public|RF_Transient|RF_MarkAsNative) UByteProperty(CPP_PROPERTY_BASE(kickPower, ForceTubeVRFunctions_eventShot_Parms), 0x0010000000000080);
@@ -156,6 +233,7 @@ void EmptyLinkFunctionForGeneratedCode1ForceTubeVRForUE4() {}
 #if WITH_METADATA
 			UMetaData* MetaData = ReturnFunction->GetOutermost()->GetMetaData();
 			MetaData->SetValue(ReturnFunction, TEXT("Category"), TEXT("ForceTubeVR"));
+			MetaData->SetValue(ReturnFunction, TEXT("CPP_Default_channel"), TEXT("rifle"));
 			MetaData->SetValue(ReturnFunction, TEXT("ModuleRelativePath"), TEXT("Public/ForceTubeVRFunctions.h"));
 			MetaData->SetValue(ReturnFunction, TEXT("ToolTip"), TEXT("Combination of kick and rumble methods ; rumble duration still be in seconds and still don't stop if you set this parameter at 0.0f"));
 #endif
@@ -205,6 +283,7 @@ void EmptyLinkFunctionForGeneratedCode1ForceTubeVRForUE4() {}
 				OuterClass->ClassFlags |= 0x20100080;
 
 				OuterClass->LinkChild(Z_Construct_UFunction_UForceTubeVRFunctions_GetBatteryLevel());
+				OuterClass->LinkChild(Z_Construct_UFunction_UForceTubeVRFunctions_InitAsync());
 				OuterClass->LinkChild(Z_Construct_UFunction_UForceTubeVRFunctions_Kick());
 				OuterClass->LinkChild(Z_Construct_UFunction_UForceTubeVRFunctions_Rumble());
 				OuterClass->LinkChild(Z_Construct_UFunction_UForceTubeVRFunctions_SetActiveResearch());
@@ -212,10 +291,11 @@ void EmptyLinkFunctionForGeneratedCode1ForceTubeVRForUE4() {}
 				OuterClass->LinkChild(Z_Construct_UFunction_UForceTubeVRFunctions_TempoToKickPower());
 
 				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_UForceTubeVRFunctions_GetBatteryLevel(), "GetBatteryLevel"); // 3273128254
-				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_UForceTubeVRFunctions_Kick(), "Kick"); // 687353909
-				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_UForceTubeVRFunctions_Rumble(), "Rumble"); // 2022077240
+				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_UForceTubeVRFunctions_InitAsync(), "InitAsync"); // 360162781
+				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_UForceTubeVRFunctions_Kick(), "Kick"); // 2954428186
+				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_UForceTubeVRFunctions_Rumble(), "Rumble"); // 124957850
 				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_UForceTubeVRFunctions_SetActiveResearch(), "SetActiveResearch"); // 619584797
-				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_UForceTubeVRFunctions_Shot(), "Shot"); // 2103230924
+				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_UForceTubeVRFunctions_Shot(), "Shot"); // 485225205
 				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_UForceTubeVRFunctions_TempoToKickPower(), "TempoToKickPower"); // 1639566275
 				OuterClass->StaticLink();
 #if WITH_METADATA
@@ -271,8 +351,8 @@ void EmptyLinkFunctionForGeneratedCode1ForceTubeVRForUE4() {}
 			ReturnPackage = CastChecked<UPackage>(StaticFindObjectFast(UPackage::StaticClass(), NULL, FName(TEXT("/Script/ForceTubeVRForUE4")), false, false));
 			ReturnPackage->SetPackageFlags(PKG_CompiledIn | 0x00000000);
 			FGuid Guid;
-			Guid.A = 0xC3098C9C;
-			Guid.B = 0x267FF364;
+			Guid.A = 0xEDE7ECE3;
+			Guid.B = 0x67020FFF;
 			Guid.C = 0x00000000;
 			Guid.D = 0x00000000;
 			ReturnPackage->SetGuid(Guid);

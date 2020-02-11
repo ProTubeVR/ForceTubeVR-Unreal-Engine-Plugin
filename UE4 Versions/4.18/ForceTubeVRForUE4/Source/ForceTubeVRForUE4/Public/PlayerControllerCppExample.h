@@ -20,18 +20,19 @@ class FORCETUBEVRFORUE4_API APlayerControllerCppExample : public APlayerControll
 		
 public:
 
+	void BeginPlay();
 	void Tick(float DeltaTime); //called each tick by UE4
-	void EndPlay(const EEndPlayReason::Type EndPlayReason); //called on quit by UE4
 
 private:
 
 	static bool autoShooting;
 	bool activeResearch = true;
-	float lastKickKey = 0.0f, lastRumbleKey = 0.0f, lastShotKey = 0.0f, lastUpdateActiveResearchKey = 0.0f, lastAutoShotKey = 0.0f;
+	float lastKickKey = 0.0f, lastRumbleKey = 0.0f, lastShotKey = 0.0f, lastUpdateActiveResearchKey = 0.0f, lastAutoShotKey = 0.0f, lastBluetoothSettingsKey = 0.0f;
+
 
 	void updateKick();
 	void updateRumble();
 	void updateShoot();
 	void updateActiveResearch();
-	void updateAutoShot();
+	void updateBluetoothSettings();
 };

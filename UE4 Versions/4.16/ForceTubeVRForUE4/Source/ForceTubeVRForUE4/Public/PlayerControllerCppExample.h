@@ -1,5 +1,4 @@
 // Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "ForceTubeVRFunctions.h"
@@ -9,6 +8,7 @@
 #include "Engine.h"
 #include "GameFramework/PlayerController.h"
 #include "PlayerControllerCppExample.generated.h"
+
 
 /**
  * 
@@ -20,8 +20,8 @@ class FORCETUBEVRFORUE4_API APlayerControllerCppExample : public APlayerControll
 		
 public:
 
+	void BeginPlay();
 	void Tick(float DeltaTime); //called each tick by UE4
-	void EndPlay(const EEndPlayReason::Type EndPlayReason); //called on quit by UE4
 
 private:
 
@@ -29,9 +29,9 @@ private:
 	bool activeResearch = true;
 	float lastKickKey = 0.0f, lastRumbleKey = 0.0f, lastShotKey = 0.0f, lastUpdateActiveResearchKey = 0.0f, lastAutoShotKey = 0.0f;
 
+
 	void updateKick();
 	void updateRumble();
 	void updateShoot();
 	void updateActiveResearch();
-	void updateAutoShot();
 };

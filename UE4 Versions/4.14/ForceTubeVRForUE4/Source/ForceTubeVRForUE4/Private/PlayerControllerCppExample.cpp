@@ -8,6 +8,11 @@
 bool APlayerControllerCppExample::autoShooting = false;
 
 
+void APlayerControllerCppExample::BeginPlay() {
+	Super::BeginPlay();
+	UForceTubeVRFunctions::InitAsync(false);
+}
+
 void APlayerControllerCppExample::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
@@ -18,7 +23,6 @@ void APlayerControllerCppExample::Tick(float DeltaTime)
 		updateRumble();
 		updateShoot();
 		updateActiveResearch();
-		updateAutoShot();
 	}
 }
 
@@ -28,7 +32,7 @@ void APlayerControllerCppExample::updateKick() {
 		if (GEngine) {
 			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Green, TEXT("Kick."));
 		}
-		UForceTubeVRFunctions::Kick(255); // 0 = no power, 255 = max power, this function is linear
+		UForceTubeVRFunctions::Kick(255, ForceTubeVRChannel::rifle); // 0 = no power, 255 = max power, this function is linear
 	}
 	lastKickKey = PlayerInput->GetKeyValue(EKeys::K);
 }
@@ -39,7 +43,7 @@ void APlayerControllerCppExample::updateRumble() {
 		if (GEngine) {
 			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Green, TEXT("Rumble."));
 		}
-		UForceTubeVRFunctions::Rumble(255, 0.500f); // for power : 0 = no power, 255 = max power, this function is linear, if power <= 126, only the little motor is activated ; for timeInSeconds : 0.0f seconds is a special command that make the ForceTubeVR never stop the rumble
+		UForceTubeVRFunctions::Rumble(255, 0.500f, ForceTubeVRChannel::rifle); // for power : 0 = no power, 255 = max power, this function is linear, if power <= 126, only the little motor is activated ; for timeInSeconds : 0.0f seconds is a special command that make the ForceTubeVR never stop the rumble
 	}
 	lastRumbleKey = PlayerInput->GetKeyValue(EKeys::R);
 }
@@ -50,7 +54,7 @@ void APlayerControllerCppExample::updateShoot() {
 		if (GEngine) {
 			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Green, TEXT("Shot : Kick + Rumble."));
 		}
-		UForceTubeVRFunctions::Shot(255, 255, 0.250f); // combination of kick and rumble methods ; rumble duration still be in seconds and still don't stop if you set this parameter at 0.0f
+		UForceTubeVRFunctions::Shot(255, 255, 0.250f, ForceTubeVRChannel::rifle); // combination of kick and rumble methods ; rumble duration still be in seconds and still don't stop if you set this parameter at 0.0f
 	}
 	lastShotKey = PlayerInput->GetKeyValue(EKeys::S);
 }
@@ -63,8 +67,7 @@ void APlayerControllerCppExample::updateActiveResearch() {
 		{
 			if (activeResearch) {
 				GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Green, TEXT("Auto reseach of ForceTubeVR enabled."));
-			}
-			else {
+			} else {
 				GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Orange, TEXT("Auto reseach of ForceTubeVR disabled."));
 			}
 		}
@@ -72,40 +75,3 @@ void APlayerControllerCppExample::updateActiveResearch() {
 	}
 	lastUpdateActiveResearchKey = PlayerInput->GetKeyValue(EKeys::U);
 }
-
-void APlayerControllerCppExample::updateAutoShot() {
-	//on A down (one time per pressure) : 
-	if (PlayerInput->GetKeyValue(EKeys::A) && !lastAutoShotKey) {
-		APlayerControllerCppExample::autoShooting = !APlayerControllerCppExample::autoShooting;
-		if (APlayerControllerCppExample::autoShooting) {
-			if (GEngine) {
-				GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Green, TEXT("Autoshot enabled."));
-			}
-			//launch a new thread
-			AsyncTask(ENamedThreads::AnyNormalThreadNormalTask, [=]()
-			{
-				// thread task : shot and wait in a loop until autoshooting become false
-				while (APlayerControllerCppExample::autoShooting) {
-					UForceTubeVRFunctions::Shot(255, 255, 0.100f);
-					FPlatformProcess::Sleep(0.130f);
-				}
-				if (GEngine) {
-					GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Orange, TEXT("Autoshot disabled."));
-				}
-			});
-		}
-	}
-	lastAutoShotKey = PlayerInput->GetKeyValue(EKeys::A);
-}
-
-void APlayerControllerCppExample::EndPlay(const EEndPlayReason::Type EndPlayReason) {
-	if (GEngine) {
-		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Orange, TEXT("End play : end any Rumble or AutoShot thread."));
-	}
-	APlayerControllerCppExample::autoShooting = false;
-	//stop any rumble to avoid ForceTubeVR to rumble without end (if the quit occured before all rumble requests had time to stop)
-	UForceTubeVRFunctions::Rumble(0, 0.0f);
-}
-
-
-

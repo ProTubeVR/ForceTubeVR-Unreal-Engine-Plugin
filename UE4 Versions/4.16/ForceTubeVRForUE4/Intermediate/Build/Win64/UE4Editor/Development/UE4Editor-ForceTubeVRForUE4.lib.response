@@ -6,9 +6,9 @@
 /NAME:"UE4Editor-ForceTubeVRForUE4.dll"
 /IGNORE:4221
 /NODEFAULTLIB
-"D:\Programmes\Epic Games\UE_4.16\Engine\Intermediate\Build\Win64\UE4Editor\Development\Engine\SharedPCH.Engine.h.obj"
-"D:\Cpp16\Plugins\ForceTubeVRForUE4\Intermediate\Build\Win64\UE4Editor\Development\ForceTubeVRForUE4\Module.ForceTubeVRForUE4.cpp.obj"
-"D:\Cpp16\Plugins\ForceTubeVRForUE4\Intermediate\Build\Win64\UE4Editor\Development\ForceTubeVRForUE4\ForceTubeVRForUE4.generated.cpp.obj"
-"D:\Programmes\Epic Games\UE_4.16\Engine\Intermediate\Build\Win64\UE4Editor\Development\ForceTubeVRForUE4\PCLaunch.rc.res"
-"D:\Programmes\Epic Games\UE_4.16\Engine\Intermediate\Build\Win64\UE4Editor\Development\ModuleVersionResource.rc.inl.res"
-/OUT:"D:\Cpp16\Plugins\ForceTubeVRForUE4\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-ForceTubeVRForUE4.lib"
+"D:\Epic Games\UE_4.16\Engine\Intermediate\Build\Win64\UE4Editor\Development\Engine\SharedPCH.Engine.h.obj"
+"D:\Unreal Projects\p16c\Plugins\ForceTubeVRForUE4\Intermediate\Build\Win64\UE4Editor\Development\ForceTubeVRForUE4\Module.ForceTubeVRForUE4.cpp.obj"
+"D:\Unreal Projects\p16c\Plugins\ForceTubeVRForUE4\Intermediate\Build\Win64\UE4Editor\Development\ForceTubeVRForUE4\ForceTubeVRForUE4.generated.cpp.obj"
+"D:\Epic Games\UE_4.16\Engine\Intermediate\Build\Win64\UE4Editor\Development\ForceTubeVRForUE4\PCLaunch.rc.res"
+"D:\Epic Games\UE_4.16\Engine\Intermediate\Build\Win64\UE4Editor\Development\ModuleVersionResource.rc.inl.res"
+/OUT:"D:\Unreal Projects\p16c\Plugins\ForceTubeVRForUE4\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-ForceTubeVRForUE4.lib"

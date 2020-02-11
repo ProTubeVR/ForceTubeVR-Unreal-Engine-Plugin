@@ -1,0 +1,8 @@
+/NOLOGO
+/errorReport:prompt
+/MACHINE:x64
+/SUBSYSTEM:WINDOWS
+"D:\Unreal Projects\p16c\Plugins\ForceTubeVRForUE4\Intermediate\Build\Win64\UE4\DebugGame\ForceTubeVRForUE4\Module.ForceTubeVRForUE4.cpp.obj"
+"D:\Unreal Projects\p16c\Plugins\ForceTubeVRForUE4\Intermediate\Build\Win64\UE4\DebugGame\ForceTubeVRForUE4\ForceTubeVRForUE4.generated.cpp.obj"
+"D:\Unreal Projects\p16c\Intermediate\Build\Win64\UE4\DebugGame\ForceTubeVRForUE4\PCLaunch.rc.res"
+/OUT:"D:\Unreal Projects\p16c\Plugins\ForceTubeVRForUE4\Binaries\Win64\UE4-ForceTubeVRForUE4-Win64-DebugGame.lib"
