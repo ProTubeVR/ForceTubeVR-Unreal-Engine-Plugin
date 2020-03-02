@@ -21,8 +21,8 @@ void EmptyLinkFunctionForGeneratedCodeForceTubeVRForUE4_init() {}
 			ReturnPackage = CastChecked<UPackage>(StaticFindObjectFast(UPackage::StaticClass(), nullptr, FName(TEXT("/Script/ForceTubeVRForUE4")), false, false));
 			ReturnPackage->SetPackageFlags(PKG_CompiledIn | 0x00000000);
 			FGuid Guid;
-			Guid.A = 0x06C8A9E3;
-			Guid.B = 0x44ABA537;
+			Guid.A = 0x08D1B965;
+			Guid.B = 0x6E4F6219;
 			Guid.C = 0x00000000;
 			Guid.D = 0x00000000;
 			ReturnPackage->SetGuid(Guid);
