@@ -14,7 +14,7 @@ enum class ForceTubeVRChannel : uint8;
 #endif
 #define FORCETUBEVRFORUE4_ForceTubeVRFunctions_generated_h
 
-#define q18c_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_25_RPC_WRAPPERS \
+#define Union18c_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_25_RPC_WRAPPERS \
  \
 	DECLARE_FUNCTION(execOpenAndroidBluetoothSettings) \
 	{ \
@@ -93,7 +93,7 @@ enum class ForceTubeVRChannel : uint8;
 	}
 
 
-#define q18c_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_25_RPC_WRAPPERS_NO_PURE_DECLS \
+#define Union18c_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_25_RPC_WRAPPERS_NO_PURE_DECLS \
  \
 	DECLARE_FUNCTION(execOpenAndroidBluetoothSettings) \
 	{ \
@@ -172,7 +172,7 @@ enum class ForceTubeVRChannel : uint8;
 	}
 
 
-#define q18c_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_25_INCLASS_NO_PURE_DECLS \
+#define Union18c_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_25_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesUForceTubeVRFunctions(); \
 	friend FORCETUBEVRFORUE4_API class UClass* Z_Construct_UClass_UForceTubeVRFunctions(); \
@@ -182,7 +182,7 @@ public: \
 	enum {IsIntrinsic=COMPILED_IN_INTRINSIC};
 
 
-#define q18c_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_25_INCLASS \
+#define Union18c_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_25_INCLASS \
 private: \
 	static void StaticRegisterNativesUForceTubeVRFunctions(); \
 	friend FORCETUBEVRFORUE4_API class UClass* Z_Construct_UClass_UForceTubeVRFunctions(); \
@@ -192,7 +192,7 @@ public: \
 	enum {IsIntrinsic=COMPILED_IN_INTRINSIC};
 
 
-#define q18c_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_25_STANDARD_CONSTRUCTORS \
+#define Union18c_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_25_STANDARD_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	NO_API UForceTubeVRFunctions(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get()); \
 	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(UForceTubeVRFunctions) \
@@ -205,7 +205,7 @@ private: \
 public:
 
 
-#define q18c_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_25_ENHANCED_CONSTRUCTORS \
+#define Union18c_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_25_ENHANCED_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	NO_API UForceTubeVRFunctions(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get()) : Super(ObjectInitializer) { }; \
 private: \
@@ -218,32 +218,32 @@ DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(UForceTubeVRFunctions); \
 	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(UForceTubeVRFunctions)
 
 
-#define q18c_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_25_PRIVATE_PROPERTY_OFFSET
-#define q18c_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_22_PROLOG
-#define q18c_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_25_GENERATED_BODY_LEGACY \
+#define Union18c_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_25_PRIVATE_PROPERTY_OFFSET
+#define Union18c_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_22_PROLOG
+#define Union18c_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_25_GENERATED_BODY_LEGACY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	q18c_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_25_PRIVATE_PROPERTY_OFFSET \
-	q18c_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_25_RPC_WRAPPERS \
-	q18c_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_25_INCLASS \
-	q18c_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_25_STANDARD_CONSTRUCTORS \
+	Union18c_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_25_PRIVATE_PROPERTY_OFFSET \
+	Union18c_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_25_RPC_WRAPPERS \
+	Union18c_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_25_INCLASS \
+	Union18c_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_25_STANDARD_CONSTRUCTORS \
 public: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
 
-#define q18c_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_25_GENERATED_BODY \
+#define Union18c_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_25_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	q18c_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_25_PRIVATE_PROPERTY_OFFSET \
-	q18c_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_25_RPC_WRAPPERS_NO_PURE_DECLS \
-	q18c_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_25_INCLASS_NO_PURE_DECLS \
-	q18c_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_25_ENHANCED_CONSTRUCTORS \
+	Union18c_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_25_PRIVATE_PROPERTY_OFFSET \
+	Union18c_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_25_RPC_WRAPPERS_NO_PURE_DECLS \
+	Union18c_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_25_INCLASS_NO_PURE_DECLS \
+	Union18c_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h_25_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
 
 #undef CURRENT_FILE_ID
-#define CURRENT_FILE_ID q18c_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h
+#define CURRENT_FILE_ID Union18c_Plugins_ForceTubeVRForUE4_Source_ForceTubeVRForUE4_Public_ForceTubeVRFunctions_h
 
 
 #define FOREACH_ENUM_FORCETUBEVRCHANNEL(op) \

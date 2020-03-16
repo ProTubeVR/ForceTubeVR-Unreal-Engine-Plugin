@@ -23,11 +23,11 @@
 /wd4838
 /w44668
 /I "D:\Epic Games\UE_4.16\Engine\Source"
-/I "D:\Unreal Projects\p16c\Plugins\ForceTubeVRForUE4\Source\ForceTubeVRForUE4\Private"
-/I "D:\Unreal Projects\p16c\Plugins\ForceTubeVRForUE4\Source"
-/I "D:\Unreal Projects\p16c\Plugins\ForceTubeVRForUE4\Source\ForceTubeVRForUE4\Public"
-/I "D:\Unreal Projects\p16c\Plugins\ForceTubeVRForUE4\Intermediate\Build\Win64\UE4Editor\Inc\ForceTubeVRForUE4"
-/I "D:\Unreal Projects\p16c\Plugins\ForceTubeVRForUE4\Source\ForceTubeVRForUE4"
+/I "D:\Unreal Projects\MarsRetour16c\Plugins\ForceTubeVRForUE4\Source\ForceTubeVRForUE4\Private"
+/I "D:\Unreal Projects\MarsRetour16c\Plugins\ForceTubeVRForUE4\Source"
+/I "D:\Unreal Projects\MarsRetour16c\Plugins\ForceTubeVRForUE4\Source\ForceTubeVRForUE4\Public"
+/I "D:\Unreal Projects\MarsRetour16c\Plugins\ForceTubeVRForUE4\Intermediate\Build\Win64\UE4Editor\Inc\ForceTubeVRForUE4"
+/I "D:\Unreal Projects\MarsRetour16c\Plugins\ForceTubeVRForUE4\Source\ForceTubeVRForUE4"
 /I "D:\Epic Games\UE_4.16\Engine\Source\Runtime\Core\Public"
 /I "D:\Epic Games\UE_4.16\Engine\Source\Runtime\Core\Public\Internationalization"
 /I "D:\Epic Games\UE_4.16\Engine\Source\Runtime\Core\Public\Async"
@@ -319,9 +319,9 @@
 /FI"D:\Epic Games\UE_4.16\Engine\Intermediate\Build\Win64\UE4Editor\Development\Engine\SharedPCH.Engine.h"
 /Yu"D:\Epic Games\UE_4.16\Engine\Intermediate\Build\Win64\UE4Editor\Development\Engine\SharedPCH.Engine.h"
 /Fp"D:\Epic Games\UE_4.16\Engine\Intermediate\Build\Win64\UE4Editor\Development\Engine\SharedPCH.Engine.h.pch"
-"D:\Unreal Projects\p16c\Plugins\ForceTubeVRForUE4\Intermediate\Build\Win64\UE4Editor\Development\ForceTubeVRForUE4\Module.ForceTubeVRForUE4.cpp"
-/FI"D:\Unreal Projects\p16c\Plugins\ForceTubeVRForUE4\Intermediate\Build\Win64\UE4Editor\Development\ForceTubeVRForUE4\Definitions.ForceTubeVRForUE4.h"
-/Fo"D:\Unreal Projects\p16c\Plugins\ForceTubeVRForUE4\Intermediate\Build\Win64\UE4Editor\Development\ForceTubeVRForUE4\Module.ForceTubeVRForUE4.cpp.obj"
+"D:\Unreal Projects\MarsRetour16c\Plugins\ForceTubeVRForUE4\Intermediate\Build\Win64\UE4Editor\Development\ForceTubeVRForUE4\Module.ForceTubeVRForUE4.cpp"
+/FI"D:\Unreal Projects\MarsRetour16c\Plugins\ForceTubeVRForUE4\Intermediate\Build\Win64\UE4Editor\Development\ForceTubeVRForUE4\Definitions.ForceTubeVRForUE4.h"
+/Fo"D:\Unreal Projects\MarsRetour16c\Plugins\ForceTubeVRForUE4\Intermediate\Build\Win64\UE4Editor\Development\ForceTubeVRForUE4\Module.ForceTubeVRForUE4.cpp.obj"
 /TP
 /GR-
 /W4

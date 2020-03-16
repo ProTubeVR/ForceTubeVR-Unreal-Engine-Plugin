@@ -7,13 +7,6 @@
 
 #if PLATFORM_ANDROID
 
-#include "Android/AndroidJNI.h"
-#include "Android/AndroidApplication.h"
-#include <android_native_app_glue.h>
-
-extern struct android_app* GNativeAndroidApp;
-
-
 JNIEnv* Env;
 jmethodID JInit;
 jmethodID JKick;
@@ -26,21 +19,26 @@ jmethodID JOpenBluetoothSettings;
 
 #endif
 
-typedef void(*_Kick)(uint8 power); // Declare a method to store the DLL method Kick. 
-typedef void(*_Rumble)(uint8 power, float timeInSeconds); // Declare a method to store the DLL method Rumble. 
-typedef void(*_Shot)(uint8 kickPower, uint8 rumblePower, float rumbleDuration); // Declare a method to store the DLL method Kick. 
+enum class ForceTubeVRChannelInt { all, rifle, rifleButt, rifleBolt, pistol1, pistol2, other, vest };
+typedef void(*_InitRifle)(); // Declare a method to store the DLL method InitRifle. 
+typedef void(*_InitPistol)(); // Declare a method to store the DLL method InitPistol. 
+typedef void(*_Kick)(uint8 power, ForceTubeVRChannelInt channel); // Declare a method to store the DLL method Kick. 
+typedef void(*_Rumble)(uint8 power, float timeInSeconds, ForceTubeVRChannelInt channel); // Declare a method to store the DLL method Rumble. 
+typedef void(*_Shot)(uint8 kickPower, uint8 rumblePower, float rumbleDuration, ForceTubeVRChannelInt channel); // Declare a method to store the DLL method Kick. 
 typedef void(*_SetActiveResearch)(bool active); // Declare a method to store the DLL method SetActive. 
-typedef void(*_InitAsync)(); // Declare a method to store the DLL method SetActive. 
 typedef uint8(*_TempoToKickPower)(float tempo); // Declare a method to store the DLL method TempoToKickPower.
 typedef uint8(*_GetBatteryLevel)(); // Declare a method to store the DLL method GetBatteryLevel.
 
+
 void *v_dllHandle;
 
+
+_InitRifle m_InitAsyncRifle;
+_InitPistol m_InitAsyncPistols;
 _Kick m_KickFromDll;
 _Rumble m_RumbleFromDll;
 _Shot m_ShotFromDll;
 _SetActiveResearch m_SetActiveFromDll;
-_InitAsync m_InitAsyncFromDll;
 _TempoToKickPower m_TempoToKickPowerFromDll;
 _GetBatteryLevel m_GetBatteryLevelFromDll;
 
@@ -48,35 +46,62 @@ _GetBatteryLevel m_GetBatteryLevelFromDll;
 #pragma region Load DLL
 
 bool UForceTubeVRFunctions::LoadForceTubeVR() {
-	
 	if (!importDLL()) {
 		return false;
 	}
-	if (!importMethodInitAsync()) {
-		return false;
-	}
-	if (!importMethodKick()) {
-		return false;
-	}
-	if (!importMethodRumble()) {
-		return false;
-	}
-	if (!importMethodShot()) {
-		return false;
-	}
-	if (!importMethodSetActive()) {
-		return false;
-	}
-	if (!importMethodTempoToKickPower()) {
-		return false;
-	}
-	if (!importMethodGetBatteryLevel()) {
-		return false;
-	}
-	if (!importMethodOpenAndroidBluetoothSettings()) {
-		return false;
-	}
-	InitAsync();
+	#if PLATFORM_WINDOWS
+		if (!importMethodWindows<_InitRifle>("InitRifle", &m_InitAsyncRifle)) {
+			return false;
+		}
+		if (!importMethodWindows<_InitPistol>("InitPistol", &m_InitAsyncPistols)) {
+			return false;
+		}
+		if (!importMethodWindows<_Kick>("KickChannel", &m_KickFromDll)) {
+			return false;
+		}
+		if (!importMethodWindows<_Rumble>("RumbleChannel", &m_RumbleFromDll)) {
+			return false;
+		}
+		if (!importMethodWindows<_Shot>("ShotChannel", &m_ShotFromDll)) {
+			return false;
+		}
+		if (!importMethodWindows<_SetActiveResearch>("SetActive", &m_SetActiveFromDll)) {
+			return false;
+		}
+		if (!importMethodWindows<_TempoToKickPower>("TempoToKickPower", &m_TempoToKickPowerFromDll)) {
+			return false;
+		}
+		if (!importMethodWindows<_GetBatteryLevel>("GetBatteryLevel", &m_GetBatteryLevelFromDll)) {
+			return false;
+		}
+	#else
+		#if PLATFORM_ANDROID
+		if (!importMethodAndroid("InitForceTubeVR", "(Landroid/app/Activity;Z)V", &JInit)) {
+				return false;
+			}
+			if (!importMethodAndroid("Kick", "(BI)V", &JKick)) {
+				return false;
+			}
+			if (!importMethodAndroid("Rumble", "(BFI)V", &JRumble)) {
+				return false;
+			}
+			if (!importMethodAndroid("Shoot", "(BBFI)V", &JShoot)) {
+				return false;
+			}
+			if (!importMethodAndroid("SetActiveResearch", "(Z)V", &JSetActiveResearch)) {
+				return false;
+			}
+			if (!importMethodAndroid("TempoToKickPower", "(F)B", &JTempoToKickPower)) {
+				return false;
+			}
+			if (!importMethodAndroid("GetBatteryLevel", "()I", &JGetBatteryLevel)) {
+				return false;
+			}
+			if (!importMethodAndroid("OpenBluetoothSettings", "()V", &JOpenBluetoothSettings)) {
+				return false;
+			}
+		#endif
+	#endif
 	return true;
 }
 
@@ -84,11 +109,11 @@ bool UForceTubeVRFunctions::LoadForceTubeVR() {
 bool UForceTubeVRFunctions::importDLL() {
 	#if PLATFORM_WINDOWS
 		#ifdef _WIN64
-			//FString filePath = *FPaths::GameDir().Append("Plugins/ForceTubeVRForUE4/ForceTubeVR_API_x64.dll");
-			FString filePath = *FPaths::ProjectDir().Append("Plugins/ForceTubeVRForUE4/ForceTubeVR_API_x64.dll");
+			FString filePath = *FPaths::GameDir().Append("Plugins/ForceTubeVRForUE4/ForceTubeVR_API_x64.dll");
+			//FString filePath = *FPaths::ProjectDir().Append("Plugins/ForceTubeVRForUE4/ForceTubeVR_API_x64.dll");
 		#else
-			//FString filePath = *FPaths::GameDir().Append("Plugins/ForceTubeVRForUE4/ForceTubeVR_API_x32.dll");
-			FString filePath = *FPaths::ProjectDir().Append("Plugins/ForceTubeVRForUE4/ForceTubeVR_API_x32.dll");
+			FString filePath = *FPaths::GameDir().Append("Plugins/ForceTubeVRForUE4/ForceTubeVR_API_x32.dll");
+			//FString filePath = *FPaths::ProjectDir().Append("Plugins/ForceTubeVRForUE4/ForceTubeVR_API_x32.dll");
 		#endif
 		if (FPaths::FileExists(filePath)) {
 			v_dllHandle = FPlatformProcess::GetDllHandle(*filePath); // Retrieve the DLL. 
@@ -111,216 +136,121 @@ bool UForceTubeVRFunctions::importDLL() {
 	#endif
 }
 
-#pragma endregion Load DLL
-
-#pragma region Import Methods
-
-bool UForceTubeVRFunctions::importMethodInitAsync() {
-	#if PLATFORM_WINDOWS
-		if (v_dllHandle != NULL) {
-			m_InitAsyncFromDll = NULL;
-			FString procName = "InitAsync";	// Needs to be the exact name of the DLL method. 
-			m_InitAsyncFromDll = (_InitAsync)FPlatformProcess::GetDllExport(v_dllHandle, *procName);
-			if (m_InitAsyncFromDll != NULL) {
-				return true;
-			}
-		}
-	return false;
-	#else
-		JInit = FJavaWrapper::FindMethod(Env, FJavaWrapper::GameActivityClassID, "InitForceTubeVR", "()V", false);
-		if (!JInit) {
-			__android_log_print(ANDROID_LOG_VERBOSE, "JNI", "No InitMethod");
-			return false;
-		} else {
-			__android_log_print(ANDROID_LOG_VERBOSE, "JNI", "Found InitMethod");
-			return true;
-		}
-	#endif
-}
-
-// Imports the method getInvertedBool from the DLL. 
-bool UForceTubeVRFunctions::importMethodKick() {
-	#if PLATFORM_WINDOWS
-		if (v_dllHandle != NULL) {
-			m_KickFromDll = NULL;
-			FString procName = "Kick";	// Needs to be the exact name of the DLL method. 
-			m_KickFromDll = (_Kick)FPlatformProcess::GetDllExport(v_dllHandle, *procName);
-			if (m_KickFromDll != NULL) {
-				return true;
-			}
-		}
-		return false;	// Return an error. 
-	#else
-		JKick = FJavaWrapper::FindMethod(Env, FJavaWrapper::GameActivityClassID, "Kick", "(B)V", false);
-		if (!JKick) {
-			return false;
-		} else {
-			return true;
-		}
-	#endif
-}
-
-bool UForceTubeVRFunctions::importMethodRumble() {
-	#if PLATFORM_WINDOWS
-		if (v_dllHandle != NULL) {
-			m_RumbleFromDll = NULL;
-			FString procName = "Rumble";	// Needs to be the exact name of the DLL method. 
-			m_RumbleFromDll = (_Rumble)FPlatformProcess::GetDllExport(v_dllHandle, *procName);
-			if (m_RumbleFromDll != NULL) {
-				return true;
-			}
-		}
-		return false;	// Return an error. 
-	#else
-		JRumble = FJavaWrapper::FindMethod(Env, FJavaWrapper::GameActivityClassID, "Rumble", "(BF)V", false);
-		if (!JRumble) {
-			return false;
-		} else {
-			return true;
-		}
-	#endif
-}
-
-bool UForceTubeVRFunctions::importMethodShot() {
-	#if PLATFORM_WINDOWS
-		if (v_dllHandle != NULL) {
-			m_ShotFromDll = NULL;
-			FString procName = "Shot";	// Needs to be the exact name of the DLL method. 
-			m_ShotFromDll = (_Shot)FPlatformProcess::GetDllExport(v_dllHandle, *procName);
-			if (m_ShotFromDll != NULL) {
-				return true;
-			}
-		}
-		return false;
-	#else
-		JShoot = FJavaWrapper::FindMethod(Env, FJavaWrapper::GameActivityClassID, "Shoot", "(BBF)V", false);
-		if (!JShoot) {
-			return false;
-		} else {
-			return true;
-		}
-	#endif
-}
-
-bool UForceTubeVRFunctions::importMethodSetActive() {
-#if PLATFORM_WINDOWS
+template<class Signature> bool UForceTubeVRFunctions::importMethodWindows(FString methodName, Signature* methodSocket) {
 	if (v_dllHandle != NULL) {
-		m_SetActiveFromDll = NULL;
-		FString procName = "SetActive";	// Needs to be the exact name of the DLL method. 
-		m_SetActiveFromDll = (_SetActiveResearch)FPlatformProcess::GetDllExport(v_dllHandle, *procName);
-		if (m_SetActiveFromDll != NULL) {
+		*methodSocket = NULL;
+		*methodSocket = (Signature)FPlatformProcess::GetDllExport(v_dllHandle, *methodName);
+		if (*methodSocket != NULL) {
 			return true;
 		}
 	}
 	return false;
-#else
-	JSetActiveResearch = FJavaWrapper::FindMethod(Env, FJavaWrapper::GameActivityClassID, "SetActiveResearch", "(Z)V", false);
-	if (!JSetActiveResearch) {
-		return false;
-	} else {
-		return true;
-	}
-#endif
 }
 
-bool UForceTubeVRFunctions::importMethodTempoToKickPower() {
-	#if PLATFORM_WINDOWS
-		if (v_dllHandle != NULL) {
-			m_TempoToKickPowerFromDll = NULL;
-			FString procName = "TempoToKickPower";	// Needs to be the exact name of the DLL method. 
-					m_TempoToKickPowerFromDll = (_TempoToKickPower)FPlatformProcess::GetDllExport(v_dllHandle, *procName);
-			if (m_TempoToKickPowerFromDll != NULL) {
-				return true;
-			}
-		}
-		return false;
-	#else
-		JTempoToKickPower = FJavaWrapper::FindMethod(Env, FJavaWrapper::GameActivityClassID, "TempoToKickPower", "(F)B", false);
-		if (!JTempoToKickPower) {
+#if PLATFORM_ANDROID
+
+bool UForceTubeVRFunctions::importMethodAndroid(const char* methodName, const char* methodParams, jmethodID* methodSocket) {
+	if (Env) {
+		*methodSocket = FJavaWrapper::FindMethod(Env, FJavaWrapper::GameActivityClassID, methodName, methodParams, false);
+		if (!methodSocket) {
 			return false;
 		} else {
 			return true;
 		}
-	#endif
-}
-
-bool UForceTubeVRFunctions::importMethodGetBatteryLevel() {
-	#if PLATFORM_WINDOWS
-		if (v_dllHandle != NULL) {
-			m_GetBatteryLevelFromDll = NULL;
-			FString procName = "GetBatteryLevel";	// Needs to be the exact name of the DLL method. 
-			m_GetBatteryLevelFromDll = (_GetBatteryLevel)FPlatformProcess::GetDllExport(v_dllHandle, *procName);
-			if (m_GetBatteryLevelFromDll != NULL) {
-				return true;
-			}
-		}
+	} else {
 		return false;
-	#else
-		JGetBatteryLevel = FJavaWrapper::FindMethod(Env, FJavaWrapper::GameActivityClassID, "GetBatteryLevel", "()I", false);
-		if (!JGetBatteryLevel) {
-			return false;
-		}
-		else {
-			return true;
-		}
-	#endif
+	}
 }
 
-bool UForceTubeVRFunctions::importMethodOpenAndroidBluetoothSettings() {
-	#if PLATFORM_ANDROID
-		JOpenBluetoothSettings = FJavaWrapper::FindMethod(Env, FJavaWrapper::GameActivityClassID, "OpenBluetoothSettings", "(Z)V", false);
-		if (!JOpenBluetoothSettings) {
-			return false;
-		}
-		else {
-			return true;
-		}
-	#else
-		return true;
-	#endif
-}
+#endif
 
-#pragma endregion Import Methods
+#pragma endregion Load DLL
 
 #pragma region Method Calls
 
-void UForceTubeVRFunctions::InitAsync() {
+void UForceTubeVRFunctions::InitAsync(bool pistolsFirst) {
 	#if PLATFORM_WINDOWS
-		if (m_InitAsyncFromDll != NULL) {
-			m_InitAsyncFromDll();
+		if (pistolsFirst) {
+			if (m_InitAsyncPistols != NULL) {
+				m_InitAsyncPistols();
+			}
+		} else {
+			if (m_InitAsyncRifle != NULL) {
+				m_InitAsyncRifle();
+			}
 		}
 	#else
-		FJavaWrapper::CallVoidMethod(Env, FJavaWrapper::GameActivityThis, JInit);
+		if (JInit != NULL) {
+			FJavaWrapper::CallVoidMethod(Env, FJavaWrapper::GameActivityThis, JInit, FJavaWrapper::GameActivityThis, pistolsFirst);
+		}
 	#endif
 }
 
-void UForceTubeVRFunctions::Kick(uint8 power) {
+ForceTubeVRChannelInt ChannelToInt(ForceTubeVRChannel channel) {
+	switch (channel) {
+		case ForceTubeVRChannel::all:
+			return ForceTubeVRChannelInt::all;
+		case ForceTubeVRChannel::rifle:
+			return ForceTubeVRChannelInt::rifle;
+		case ForceTubeVRChannel::rifleButt:
+			return ForceTubeVRChannelInt::rifleButt;
+		case ForceTubeVRChannel::rifleBolt:
+			return ForceTubeVRChannelInt::rifleBolt;
+		case ForceTubeVRChannel::pistol1:
+			return ForceTubeVRChannelInt::pistol1;
+		case ForceTubeVRChannel::pistol2:
+			return ForceTubeVRChannelInt::pistol2;
+		case ForceTubeVRChannel::other:
+			return ForceTubeVRChannelInt::other;
+		case ForceTubeVRChannel::vest:
+			return ForceTubeVRChannelInt::vest;
+		default:
+			return ForceTubeVRChannelInt::all;
+	}
+}
+
+void UForceTubeVRFunctions::Kick(uint8 power, ForceTubeVRChannel channel) {
 	#if PLATFORM_WINDOWS
 		if (m_KickFromDll != NULL) {
-			m_KickFromDll(power); // Call the DLL method with arguments corresponding to the exact signature and return type of the method. 
+			if (GEngine) {
+				GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Green, TEXT(""));
+			}
+			m_KickFromDll(power, ChannelToInt(channel)); // Call the DLL method with arguments corresponding to the exact signature and return type of the method. 
 		}
 	#else
-		FJavaWrapper::CallVoidMethod(Env, FJavaWrapper::GameActivityThis, JKick, power);
+		if (JKick != NULL) {
+			FJavaWrapper::CallVoidMethod(Env, FJavaWrapper::GameActivityThis, JKick, (int8) power, (int) channel);
+		}
 	#endif
 }
 
-void UForceTubeVRFunctions::Rumble(uint8 power, float timeInSeconds) {
+void UForceTubeVRFunctions::Rumble(uint8 power, float timeInSeconds, ForceTubeVRChannel channel) {
 	#if PLATFORM_WINDOWS
 		if (m_RumbleFromDll != NULL) {
-			m_RumbleFromDll(power, timeInSeconds); // Call the DLL method with arguments corresponding to the exact signature and return type of the method.
+			if (GEngine) {
+				GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Green, TEXT(""));
+			}
+			m_RumbleFromDll(power, timeInSeconds, ChannelToInt(channel)); // Call the DLL method with arguments corresponding to the exact signature and return type of the method.
 		}
 	#else
-		FJavaWrapper::CallVoidMethod(Env, FJavaWrapper::GameActivityThis, JRumble, power, timeInSeconds);
+		if (JRumble != NULL) {
+			FJavaWrapper::CallVoidMethod(Env, FJavaWrapper::GameActivityThis, JRumble, (int8) power, timeInSeconds, (int) channel);
+		}
 	#endif
 }
 
-void UForceTubeVRFunctions::Shot(uint8 kickPower, uint8 rumblePower, float rumbleDuration) {
+void UForceTubeVRFunctions::Shot(uint8 kickPower, uint8 rumblePower, float rumbleDuration, ForceTubeVRChannel channel) {
 	#if PLATFORM_WINDOWS
 		if (m_ShotFromDll != NULL) {
-			m_ShotFromDll(kickPower, rumblePower, rumbleDuration); // Call the DLL method with arguments corresponding to the exact signature and return type of the method.
+			if (GEngine) {
+				GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Green, TEXT(""));
+			}
+			m_ShotFromDll(kickPower, rumblePower, rumbleDuration, ChannelToInt(channel)); // Call the DLL method with arguments corresponding to the exact signature and return type of the method.
 		}
 	#else
-		FJavaWrapper::CallVoidMethod(Env, FJavaWrapper::GameActivityThis, JShoot, kickPower, rumblePower, rumbleDuration);
+		if (JShoot != NULL) {
+			FJavaWrapper::CallVoidMethod(Env, FJavaWrapper::GameActivityThis, JShoot, (int8) kickPower, (int8) rumblePower, rumbleDuration, (int) channel);
+		}
 	#endif
 }
 
@@ -330,7 +260,9 @@ void UForceTubeVRFunctions::SetActiveResearch(bool active) {
 			m_SetActiveFromDll(active);
 		}
 	#else
-		FJavaWrapper::CallVoidMethod(Env, FJavaWrapper::GameActivityThis, JSetActiveResearch, active);
+		if (JSetActiveResearch != NULL) {
+			FJavaWrapper::CallVoidMethod(Env, FJavaWrapper::GameActivityThis, JSetActiveResearch, active);
+		}
 	#endif
 }
 
@@ -342,7 +274,12 @@ uint8 UForceTubeVRFunctions::TempoToKickPower(float tempo) {
 			return 0;
 		}
 	#else
-		return FJavaWrapper::CallIntMethod(Env, FJavaWrapper::GameActivityThis, JTempoToKickPower, tempo);
+		if (JTempoToKickPower != NULL) {
+			return FJavaWrapper::CallIntMethod(Env, FJavaWrapper::GameActivityThis, JTempoToKickPower, tempo);
+		} else {
+			return 0;
+		}
+		
 	#endif
 }
 
@@ -355,13 +292,19 @@ uint8 UForceTubeVRFunctions::GetBatteryLevel() {
 			return 0;
 		}
 	#else
-		return (uint8)FJavaWrapper::CallIntMethod(Env, FJavaWrapper::GameActivityThis, JGetBatteryLevel);
+		if (JGetBatteryLevel != NULL) {
+			return (uint8)FJavaWrapper::CallIntMethod(Env, FJavaWrapper::GameActivityThis, JGetBatteryLevel);
+		} else {
+			return 0;
+		}
 	#endif
 }
 
-void UForceTubeVRFunctions::OpenAndroidBluetoothSettings(bool isInVR) {
+void UForceTubeVRFunctions::OpenAndroidBluetoothSettings() {
 	#if PLATFORM_ANDROID
-		FJavaWrapper::CallVoidMethod(Env, FJavaWrapper::GameActivityThis, JOpenBluetoothSettings, isInVR);
+		if (JOpenBluetoothSettings != NULL) {
+			FJavaWrapper::CallVoidMethod(Env, FJavaWrapper::GameActivityThis, JOpenBluetoothSettings);
+		}
 	#endif
 }
 
@@ -372,13 +315,15 @@ void UForceTubeVRFunctions::OpenAndroidBluetoothSettings(bool isInVR) {
 void UForceTubeVRFunctions::FreeDLL() {
 	#if PLATFORM_WINDOWS
 		if (v_dllHandle != NULL) {
-			m_InitAsyncFromDll = NULL;
+			m_InitAsyncRifle = NULL;
+			m_InitAsyncPistols = NULL;
 			m_KickFromDll = NULL;
 			m_RumbleFromDll = NULL;
 			m_ShotFromDll = NULL;
 			m_SetActiveFromDll = NULL;
 			m_TempoToKickPowerFromDll = NULL;
-			FPlatformProcess::FreeDllHandle(v_dllHandle); v_dllHandle = NULL;
+			FPlatformProcess::FreeDllHandle(v_dllHandle);
+			v_dllHandle = NULL;
 		}
 	#endif
 }

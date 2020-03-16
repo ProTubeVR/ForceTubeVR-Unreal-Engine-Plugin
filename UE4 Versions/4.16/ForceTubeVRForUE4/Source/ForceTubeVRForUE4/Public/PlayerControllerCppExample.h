@@ -1,7 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 #pragma once
 
-#include "ForceTubeVRFunctions.h"
 #include "Runtime/Engine/Classes/GameFramework/PlayerInput.h"
 #include "Runtime/InputCore/Classes/InputCoreTypes.h"
 #include "Runtime/Core/Public/Async/Async.h"

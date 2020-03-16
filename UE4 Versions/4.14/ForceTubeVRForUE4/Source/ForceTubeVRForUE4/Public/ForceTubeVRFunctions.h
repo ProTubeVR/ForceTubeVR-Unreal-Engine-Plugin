@@ -38,7 +38,6 @@ public:
 
 private:
 
-	static void* v_dllHandle;
 	static bool importDLL();
 	template<class Signature> static bool importMethod(FString procName, Signature* methodSocket);
 	static bool LoadForceTubeVR();

@@ -13,92 +13,92 @@
    </AARImports>
 
   <androidManifestUpdates>
+	  <addAttribute tag="manifest" name="android:sharedUserId" value="ForceTubeVR.Channels"/>
 	  <addPermission android:name="android.permission.BLUETOOTH"/>
 	  <addPermission android:name="android.permission.BLUETOOTH_ADMIN"/>
   </androidManifestUpdates>
 
-  <buildGradleAdditions>
-	  <insert>
-          </insert>
-  </buildGradleAdditions>
-
   <gameActivityImportAdditions>
-          <insert>
-import com.ProTubeVR.ForceTubeVRInterface.*;
-import android.app.Activity;
-          </insert>
+      <insert>
+		import com.ProTubeVR.ForceTubeVRInterface.ForceTubeVRInterface;
+		import android.content.BroadcastReceiver;
+		import android.content.Context;
+		import android.content.Intent;
+		import android.content.IntentFilter;
+      </insert>
   </gameActivityImportAdditions>
 
   <gameActivityClassAdditions>
 	<insert>
+	
+		private ForceTubeVRInterface forcetubevr = null;
+		
 
-ForceTubeVRInterface forcetubevr = null;
-
-
-public void InitForceTubeVR(android.app.Activity gameActivity, boolean pistolsFirst) {
-	ForceTubeVRInterfaceActivity.Call(gameActivity, pistolsFirst);
-	while(forcetubevr == null){
-		forcetubevr = ForceTubeVRInterfaceActivity.getInterface();
-		try{
-                    Thread.sleep(3);
-                } catch(InterruptedException e) {
-                    android.util.Log.e("ForceTubeVR", "ThreadError : Thread Interrupted");
-                }
-	}
-}
-
-public void Kick(byte power, int target){
-	if (forcetubevr != null){
-		forcetubevr.sendKick(power, target);
-	}
-}
-
-public void Rumble(byte power, float duration, int target){
-	if (forcetubevr != null){
-		forcetubevr.sendRumble(power, (int)(duration * 1000.0f), target);
-	}
-}
-
-public void Shoot(byte kickPower, byte rumblePower, float rumbleDuration, int target){
-	if (forcetubevr != null){
-		forcetubevr.sendShot(kickPower, rumblePower, (int)(rumbleDuration * 1000.0f), target);
-	}
-}
-
-public void SetActiveResearch(boolean activeResearch){
-	if (forcetubevr != null){
-		forcetubevr.setActiveResearch(activeResearch);
-	}
-}
-
-public byte TempoToKickPower(float tempo){
-	if (forcetubevr != null){
-		return forcetubevr.tempoToKickPower(tempo);
-	} else {
-		return 0;
-	}
-}
-
-public int GetBatteryLevel(){
-	if (forcetubevr != null){
-		int percent = (int) forcetubevr.getBatteryPercent();
-		if(percent == 255){
-			return 0;
-		}else{
-			if(percent > 100){
-				percent = 100;
+		public void InitForceTubeVR(android.app.Activity gameActivity, boolean pistolsFirst) {
+			if(forcetubevr == null){
+				/*BroadcastReceiver mReceiver = new BroadcastReceiver() {
+					@Override
+					public void onReceive(Context context, Intent intent) {
+						forcetubevr.receiveForceTubeVROrder(intent);
+						context.unregisterReceiver(this);
+					}
+				};
+				registerReceiver(mReceiver, new IntentFilter("ForceTubeVRChannels"));*/
+				forcetubevr = ForceTubeVRInterface.getInstance(gameActivity, pistolsFirst);
 			}
 		}
-		return percent;
-	} else {
-		return 0;
-	}
-}
 
-public void OpenBluetoothSettings(){
-	forcetubevr.openBluetoothSettings(false);
-}
+		public void Kick(byte power, int target){
+			if (forcetubevr != null){
+				forcetubevr.sendKick(power, target);
+			}
+		}
 
+		public void Rumble(byte power, float duration, int target){
+			if (forcetubevr != null){
+				forcetubevr.sendRumble(power, (int)(duration * 1000.0f), target);
+			}
+		}
+
+		public void Shoot(byte kickPower, byte rumblePower, float rumbleDuration, int target){
+			if (forcetubevr != null){
+				forcetubevr.sendShot(kickPower, rumblePower, (int)(rumbleDuration * 1000.0f), target);
+			}
+		}
+
+		public void SetActiveResearch(boolean activeResearch){
+			if (forcetubevr != null){
+				forcetubevr.setActiveResearch(activeResearch);
+			}
+		}
+
+		public byte TempoToKickPower(float tempo){
+			if (forcetubevr != null){
+				return forcetubevr.tempoToKickPower(tempo);
+			} else {
+				return 0;
+			}
+		}
+
+		public int GetBatteryLevel(){
+			if (forcetubevr != null){
+				int percent = (int) forcetubevr.getBatteryPercent();
+				if(percent == 255){
+					return 0;
+				}else{
+					if(percent > 100){
+						percent = 100;
+					}
+				}
+				return percent;
+			} else {
+				return 0;
+			}
+		}
+
+		public void OpenBluetoothSettings(){
+			forcetubevr.openBluetoothSettings();
+		}
 	</insert>
   </gameActivityClassAdditions>
 </root>

@@ -19,8 +19,8 @@ void EmptyLinkFunctionForGeneratedCodeForceTubeVRForUE4_init() {}
 			static const UE4CodeGen_Private::FPackageParams PackageParams = {
 				"/Script/ForceTubeVRForUE4",
 				PKG_CompiledIn | 0x00000000,
-				0x69DF651F,
-				0x1CB30EB0,
+				0x9B238B76,
+				0x6A52F414,
 				nullptr, 0,
 				METADATA_PARAMS(nullptr, 0)
 			};

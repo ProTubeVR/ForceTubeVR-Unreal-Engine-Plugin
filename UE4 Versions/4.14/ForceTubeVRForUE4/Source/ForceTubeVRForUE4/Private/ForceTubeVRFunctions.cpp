@@ -15,9 +15,7 @@ typedef uint8(*_TempoToKickPower)(float tempo); // Declare a method to store the
 typedef uint8(*_GetBatteryLevel)(); // Declare a method to store the DLL method GetBatteryLevel.
 
 
-void* UForceTubeVRFunctions::v_dllHandle = NULL;
-
-
+void* v_dllHandle;
 _InitRifle m_InitAsyncRifle;
 _InitPistol m_InitAsyncPistols;
 _Kick m_KickFromDll;
@@ -106,20 +104,29 @@ void UForceTubeVRFunctions::InitAsync(bool pistolsFirst) {
 	}	
 }
 
-void UForceTubeVRFunctions::Kick(uint8 power, ForceTubeVRChannel channel) {
+void UForceTubeVRFunctions::Kick(uint8 power, ForceTubeVRChannel channel){
 	if (m_KickFromDll != NULL) {
+		if (GEngine) {
+			GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Green, TEXT(""));
+		}
 		m_KickFromDll(power, channel); // Call the DLL method with arguments corresponding to the exact signature and return type of the method. 
 	}
 }
 
 void UForceTubeVRFunctions::Rumble(uint8 power, float timeInSeconds, ForceTubeVRChannel channel) {
 	if (m_RumbleFromDll != NULL) {
+		if (GEngine) {
+			GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Green, TEXT(""));
+		}
 		m_RumbleFromDll(power, timeInSeconds, channel); // Call the DLL method with arguments corresponding to the exact signature and return type of the method.
 	}
 }
 
 void UForceTubeVRFunctions::Shot(uint8 kickPower, uint8 rumblePower, float rumbleDuration, ForceTubeVRChannel channel) {
 	if (m_ShotFromDll != NULL) {
+		if (GEngine) {
+			GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Green, TEXT(""));
+		}
 		m_ShotFromDll(kickPower, rumblePower, rumbleDuration, channel); // Call the DLL method with arguments corresponding to the exact signature and return type of the method.
 	}
 }

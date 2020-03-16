@@ -19,11 +19,12 @@ jmethodID JOpenBluetoothSettings;
 
 #endif
 
+enum class ForceTubeVRChannelInt { all, rifle, rifleButt, rifleBolt, pistol1, pistol2, other, vest };
 typedef void(*_InitRifle)(); // Declare a method to store the DLL method InitRifle. 
 typedef void(*_InitPistol)(); // Declare a method to store the DLL method InitPistol. 
-typedef void(*_Kick)(uint8 power, ForceTubeVRChannel channel); // Declare a method to store the DLL method Kick. 
-typedef void(*_Rumble)(uint8 power, float timeInSeconds, ForceTubeVRChannel channel); // Declare a method to store the DLL method Rumble. 
-typedef void(*_Shot)(uint8 kickPower, uint8 rumblePower, float rumbleDuration, ForceTubeVRChannel channel); // Declare a method to store the DLL method Kick. 
+typedef void(*_Kick)(uint8 power, ForceTubeVRChannelInt channel); // Declare a method to store the DLL method Kick. 
+typedef void(*_Rumble)(uint8 power, float timeInSeconds, ForceTubeVRChannelInt channel); // Declare a method to store the DLL method Rumble. 
+typedef void(*_Shot)(uint8 kickPower, uint8 rumblePower, float rumbleDuration, ForceTubeVRChannelInt channel); // Declare a method to store the DLL method Kick. 
 typedef void(*_SetActiveResearch)(bool active); // Declare a method to store the DLL method SetActive. 
 typedef uint8(*_TempoToKickPower)(float tempo); // Declare a method to store the DLL method TempoToKickPower.
 typedef uint8(*_GetBatteryLevel)(); // Declare a method to store the DLL method GetBatteryLevel.
@@ -185,13 +186,36 @@ void UForceTubeVRFunctions::InitAsync(bool pistolsFirst) {
 	#endif
 }
 
+ForceTubeVRChannelInt ChannelToInt(ForceTubeVRChannel channel) {
+	switch (channel) {
+		case ForceTubeVRChannel::all:
+			return ForceTubeVRChannelInt::all;
+		case ForceTubeVRChannel::rifle:
+			return ForceTubeVRChannelInt::rifle;
+		case ForceTubeVRChannel::rifleButt:
+			return ForceTubeVRChannelInt::rifleButt;
+		case ForceTubeVRChannel::rifleBolt:
+			return ForceTubeVRChannelInt::rifleBolt;
+		case ForceTubeVRChannel::pistol1:
+			return ForceTubeVRChannelInt::pistol1;
+		case ForceTubeVRChannel::pistol2:
+			return ForceTubeVRChannelInt::pistol2;
+		case ForceTubeVRChannel::other:
+			return ForceTubeVRChannelInt::other;
+		case ForceTubeVRChannel::vest:
+			return ForceTubeVRChannelInt::vest;
+		default:
+			return ForceTubeVRChannelInt::all;
+	}
+}
+
 void UForceTubeVRFunctions::Kick(uint8 power, ForceTubeVRChannel channel) {
 	#if PLATFORM_WINDOWS
 		if (m_KickFromDll != NULL) {
 			if (GEngine) {
 				GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Green, TEXT(""));
 			}
-			m_KickFromDll(power, channel); // Call the DLL method with arguments corresponding to the exact signature and return type of the method. 
+			m_KickFromDll(power, ChannelToInt(channel)); // Call the DLL method with arguments corresponding to the exact signature and return type of the method. 
 		}
 	#else
 		if (JKick != NULL) {
@@ -206,7 +230,7 @@ void UForceTubeVRFunctions::Rumble(uint8 power, float timeInSeconds, ForceTubeVR
 			if (GEngine) {
 				GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Green, TEXT(""));
 			}
-			m_RumbleFromDll(power, timeInSeconds, channel); // Call the DLL method with arguments corresponding to the exact signature and return type of the method.
+			m_RumbleFromDll(power, timeInSeconds, ChannelToInt(channel)); // Call the DLL method with arguments corresponding to the exact signature and return type of the method.
 		}
 	#else
 		if (JRumble != NULL) {
@@ -221,7 +245,7 @@ void UForceTubeVRFunctions::Shot(uint8 kickPower, uint8 rumblePower, float rumbl
 			if (GEngine) {
 				GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Green, TEXT(""));
 			}
-			m_ShotFromDll(kickPower, rumblePower, rumbleDuration, channel); // Call the DLL method with arguments corresponding to the exact signature and return type of the method.
+			m_ShotFromDll(kickPower, rumblePower, rumbleDuration, ChannelToInt(channel)); // Call the DLL method with arguments corresponding to the exact signature and return type of the method.
 		}
 	#else
 		if (JShoot != NULL) {

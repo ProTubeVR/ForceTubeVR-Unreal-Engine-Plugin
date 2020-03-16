@@ -105,7 +105,7 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_ForceTubeVRChannel(Force
 			UMetaData* MetaData = ReturnFunction->GetOutermost()->GetMetaData();
 			MetaData->SetValue(ReturnFunction, TEXT("Category"), TEXT("ForceTubeVR"));
 			MetaData->SetValue(ReturnFunction, TEXT("ModuleRelativePath"), TEXT("Public/ForceTubeVRFunctions.h"));
-			MetaData->SetValue(ReturnFunction, TEXT("ToolTip"), TEXT(""));
+			MetaData->SetValue(ReturnFunction, TEXT("ToolTip"), TEXT("Get the battery value of a connected ForceTubeVR (only get the first if it is more than one connected)"));
 #endif
 		}
 		return ReturnFunction;
@@ -296,7 +296,7 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_ForceTubeVRChannel(Force
 				OuterClass->LinkChild(Z_Construct_UFunction_UForceTubeVRFunctions_Shot());
 				OuterClass->LinkChild(Z_Construct_UFunction_UForceTubeVRFunctions_TempoToKickPower());
 
-				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_UForceTubeVRFunctions_GetBatteryLevel(), "GetBatteryLevel"); // 3273128254
+				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_UForceTubeVRFunctions_GetBatteryLevel(), "GetBatteryLevel"); // 3525671695
 				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_UForceTubeVRFunctions_InitAsync(), "InitAsync"); // 360162781
 				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_UForceTubeVRFunctions_Kick(), "Kick"); // 374762104
 				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_UForceTubeVRFunctions_Rumble(), "Rumble"); // 968873429
@@ -316,7 +316,7 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_ForceTubeVRChannel(Force
 		check(OuterClass->GetClass());
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(UForceTubeVRFunctions, 2004349488);
+	IMPLEMENT_CLASS(UForceTubeVRFunctions, 1371092111);
 	static FCompiledInDefer Z_CompiledInDefer_UClass_UForceTubeVRFunctions(Z_Construct_UClass_UForceTubeVRFunctions, &UForceTubeVRFunctions::StaticClass, TEXT("/Script/ForceTubeVRForUE4"), TEXT("UForceTubeVRFunctions"), false, nullptr, nullptr, nullptr);
 	DEFINE_VTABLE_PTR_HELPER_CTOR(UForceTubeVRFunctions);
 	void APlayerControllerCppExample::StaticRegisterNativesAPlayerControllerCppExample()
@@ -366,7 +366,7 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_ForceTubeVRChannel(Force
 			ReturnPackage = CastChecked<UPackage>(StaticFindObjectFast(UPackage::StaticClass(), nullptr, FName(TEXT("/Script/ForceTubeVRForUE4")), false, false));
 			ReturnPackage->SetPackageFlags(PKG_CompiledIn | 0x00000000);
 			FGuid Guid;
-			Guid.A = 0x764B8ABC;
+			Guid.A = 0x9D81E5CA;
 			Guid.B = 0x67020FFF;
 			Guid.C = 0x00000000;
 			Guid.D = 0x00000000;
