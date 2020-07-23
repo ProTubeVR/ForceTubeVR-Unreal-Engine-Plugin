@@ -13,7 +13,6 @@
    </AARImports>
 
   <androidManifestUpdates>
-	  <addAttribute tag="manifest" name="android:sharedUserId" value="ForceTubeVR.Channels"/>
 	  <addPermission android:name="android.permission.BLUETOOTH"/>
 	  <addPermission android:name="android.permission.BLUETOOTH_ADMIN"/>
   </androidManifestUpdates>
@@ -21,10 +20,6 @@
   <gameActivityImportAdditions>
       <insert>
 		import com.ProTubeVR.ForceTubeVRInterface.ForceTubeVRInterface;
-		import android.content.BroadcastReceiver;
-		import android.content.Context;
-		import android.content.Intent;
-		import android.content.IntentFilter;
       </insert>
   </gameActivityImportAdditions>
 
@@ -36,14 +31,6 @@
 
 		public void InitForceTubeVR(android.app.Activity gameActivity, boolean pistolsFirst) {
 			if(forcetubevr == null){
-				/*BroadcastReceiver mReceiver = new BroadcastReceiver() {
-					@Override
-					public void onReceive(Context context, Intent intent) {
-						forcetubevr.receiveForceTubeVROrder(intent);
-						context.unregisterReceiver(this);
-					}
-				};
-				registerReceiver(mReceiver, new IntentFilter("ForceTubeVRChannels"));*/
 				forcetubevr = ForceTubeVRInterface.getInstance(gameActivity, pistolsFirst);
 			}
 		}

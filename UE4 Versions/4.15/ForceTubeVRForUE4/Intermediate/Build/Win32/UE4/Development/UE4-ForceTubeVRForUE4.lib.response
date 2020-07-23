@@ -1,7 +1,0 @@
-/NOLOGO
-/errorReport:prompt
-/MACHINE:x86
-/SUBSYSTEM:WINDOWS
-"D:\Unreal Projects\Union15c\Plugins\ForceTubeVRForUE4\Intermediate\Build\Win32\UE4\Development\ForceTubeVRForUE4\Module.ForceTubeVRForUE4.cpp.obj"
-"D:\Unreal Projects\Union15c\Plugins\ForceTubeVRForUE4\Intermediate\Build\Win32\UE4\Development\ForceTubeVRForUE4\ForceTubeVRForUE4.generated.cpp.obj"
-/OUT:"D:\Unreal Projects\Union15c\Plugins\ForceTubeVRForUE4\Binaries\Win32\UE4-ForceTubeVRForUE4.lib"

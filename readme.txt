@@ -1,29 +1,20 @@
 Requirements : 
 
 First, you have to put this plugin in a "Plugins" folder inside your game directory.
-If you want to package for Android, you have to use 4.17 Unreal Engine version or higher and to set minimum SDK version to 19 in Edit->Project Settings->Platforms->Android.
+If you want to package for Android, you need to use the 4.17 plugin or higher. Then you have to go in Edit->Project Settings->Platforms->Android, set the minimum SDK version to 19 or higher and enable the "Enable Gradle instead of Ant" option.
 To call these functions, you need to include "ForceTubeVRFunctions.h" before. You don't have to instantiate UForceTubeVRFunctions, because all these functions are static.
 Don't forget to turn on your bluetooth with a paired ForceTubeVR before any test.
 
 
-
-Before all things :
-
-In the [ProjectDir]\Plugins\ForceTubeVRForUE4 directory, you have some dll. The dll named ForceTubeVR_API_x32.dll and ForceTubeVR_API_x64.dll are executed at launch by editor and packaged games.
-ForceTubeVR_API_x32_full.dll and ForceTubeVR_API_x64_full.dll are fully fonctionnal but will cause some difficulties in packaging (fail with an Error_UnknownCookFailure).
-For this reason, you have to replace ForceTubeVR_API_x32.dll and ForceTubeVR_API_x64.dll by ForceTubeVR_API_x32_full.dll and ForceTubeVR_API_x64_full.dll (by renaming, because you have to keep the same names) to make the plugin works in Windows (in editor and packaged games).
-But then you'll have to replace ForceTubeVR_API_x32.dll and ForceTubeVR_API_x64.dll by ForceTubeVR_API_x32_inert.dll and ForceTubeVR_API_x64_inert.dll before you launch a packaging of your project (or it will fail with an Error_UnknownCookFailure).
-In a game packaged this way, you can go to WindowsNoEditor\QuestCpp21\Plugins\ForceTubeVRForUE4 to replace the inert dll by full dll (but you still have to keep the same names).
-
-
-
 Fonctions:
 
-	FORCETUBEVR void UForceTubeVRFunctions::Kick(uint8 power);
+	FORCETUBEVR void UForceTubeVRFunctions::InitAsync(bool pistolsFirst = false);
 
-	FORCETUBEVR void UForceTubeVRFunctions::Rumble(uint8 power, float timeInSeconds);
+	FORCETUBEVR void UForceTubeVRFunctions::Kick(uint8 power, ForceTubeVRChannel target = ForceTubeVRChannel::rifle);
 
-	FORCETUBEVR void UForceTubeVRFunctions::Shot(uint8 kickPower, uint8 rumblePower, float rumbleDuration);
+	FORCETUBEVR void UForceTubeVRFunctions::Rumble(uint8 power, float timeInSeconds, ForceTubeVRChannel target = ForceTubeVRChannel::rifle);
+
+	FORCETUBEVR void UForceTubeVRFunctions::Shot(uint8 kickPower, uint8 rumblePower, float rumbleDuration, ForceTubeVRChannel target = ForceTubeVRChannel::rifle);
 
 	FORCETUBEVR void UForceTubeVRFunctions::SetActiveResearch(bool active);
 
@@ -31,24 +22,17 @@ Fonctions:
 
 	FORCETUBEVR uint8 UForceTubeVRFunctions::GetBatteryLevel();
 
-	FORCETUBEVR void UForceTubeVRFunctions::OpenAndroidBluetoothSettings(bool isInVR);
+	FORCETUBEVR void UForceTubeVRFunctions::OpenAndroidBluetoothSettings();
+
+enum : 
+
+	ForceTubeVRChannel { all, rifle, rifleButt, rifleBolt, pistol1, pistol2, other, vest };
 
 
+-----------------------------------------------------------Pairing--------------------------------------------------------------------------
 
------------------------------------------------------------Connect--------------------------------------------------------------------------
-
-You have to connect and pair the ForceTubeVR to be able to use it with this plugin.
-The ForceTubeVR himself have to be paired to Windows or Android via bluetooth standard connection. 
-You can use the "BT Manager by ProTubeVR" app available in SideQuest (https://sidequestvr.com/#/app/19) to pair it with your Oculus Quest, or you can use (in Android) the OpenAndroidBluetoothSettings plugin method.
-
-The plugin at game start will call once the method : void InitAsync();
- ---> so if the ForceTubeVR is already paired under windows and powered, then the forcetube will pass from "paired" state to "connected" state (can see it in your OS bluetooth manager).
-at this point, once connected, all is good !
-
-And, if the ForceTubeVR isn't paired or powered on game start, or was turned off during the game, or if the connection is lost for any other reason,
-the fonction "InitAsync()" automatically reconnect the ForceTubeVR when Windows or Android detect the loss of connection
-as well you didn't paused the dedicated thread by calling SetActiveResearch(false).
-
+You have to pair the ForceTubeVR to be able to use it with this plugin.
+The ForceTubeVR itself has to be paired to Windows or Android via bluetooth standard connection.
 
 
 ----------------------------------------------------------Haptic effects------------------------------------------------------------------------
@@ -57,9 +41,18 @@ ForceTubeVR integrate 2 main haptic effects :
 Rumble and Kick
 
 
-rumbleDuration : set rumble duration in second, 0.1 will activate rumble motor for 100ms (side note : under 0.03s, the motors are not activated enouph to give any effect). You can make a rumble without end setting this parameter to 0.
+----------------------------------------------------------ForceTubeVRChannel------------------------------------------------------------------------
 
 
+"all" and "rifle" aren't real channels because "all" redirect to all ForceTubeVR regardless of channels and "rifle" redirect to "rifleButt" and "rifleBolt" chanels.
+
+----------------------------------------------------------InitAsync-----------------------------------------------------------------
+
+If a forcetube is already paired on Windows or Android and powered, then all the forcetubevrs will pass from "paired" status to "connected" status (can see it in Windows Bluetooth manager) just after you call InitAsync.
+With no parameter or a boolean "false" as only parameter, the six first paired forcetubevr detected will be put in the six channels in this order : rifleButt, rifleBolt, pistol1, pistol2, other, vest. It is the best for rifle games.
+If you prefer to set it up as a two pistol game (or any game with one weapon by hand), you should call InitAsync with a boolean "true" as only parameter, 
+and the six first paired forcetubevr detected will be put in the six channels in this order : pistol1, pistol2, rifleButt, rifleBolt, other, vest.
+In the exemple, InitAsync() is called at RuntimeInitialize, so it is when the game with this plugin is launched (from editor or package).
 
 ----------------------------------------------------------Rumble----------------------------------------------------------------
 
@@ -68,12 +61,13 @@ Those 2 motors are driven by the same signal as following :
 -if rumble "power" is from 0 to 49% (0 to 126), only the small will spin (you can modulate the little motor speed, little motor max speed is reatch at 127 power value);
 -if rumble "power" is from 50% to 100% (127 to 255), Small motor is driven max speed, big motor spin according to "power" value (255 give the max speed for both motors).
 Rumble duration and power can be freely setted up, it depends of your needs. 
-The "timeInSeconds" parameter is the rumble duration in seconds (example : 0.1 will activate rumble motor for 100ms). Under 0.03s, the motors are not activated enough to give any effect.
+The "timeInSeconds" parameter is the rumble duration in seconds (example : 0.1 will activate rumble motor for 100ms). Under 0.03s, the motors are not activated enough to give any effect. 
+You can make a rumble without end setting this parameter to 0.0f.
 
 Fonction using it :
 
-	FORCETUBEVR void Rumble(uint8 power, float timeInSeconds);
-	FORCETUBEVR void Shot(uint8 kickPower, uint8 rumblePower, float rumbleDuration);
+	FORCETUBEVR void Rumble(uint8 power, float timeInSeconds, ForceTubeVRChannel target);
+	FORCETUBEVR void Shot(uint8 kickPower, uint8 rumblePower, float rumbleDuration, ForceTubeVRChannel target);
 
 
 
@@ -124,14 +118,14 @@ SV98: bolt action = 100% ---> 255 value
 
 Fonction using the kick :
 
-	FORCETUBEVR void Kick(uint8 power);
-	FORCETUBEVR void Shot(uint8 kickPower, uint8 rumblePower, float rumbleDuration);
+	FORCETUBEVR void Kick(uint8 power, ForceTubeVRChannel target);
+	FORCETUBEVR void Shot(uint8 kickPower, uint8 rumblePower, float rumbleDuration, ForceTubeVRChannel target);
 
 
 
 ----------------------------------------------------------Shot-----------------------------------------------------------------
 
-This method is a combination of the both Kick and Rumble methods. So, "Shot(kickPower, rumblePower, rumbleDuration)" is equivalent to "Kick(kickPower)" and "Rumble(rumblePower, rumbleDuration)".
+This method is a combination of the both Kick and Rumble methods. So, "Shot" is equivalent to "Kick" and "Rumble".
 
 
 
@@ -143,8 +137,8 @@ It is useful if you want to make an autoshot with the higher kick power without 
 
 You can use this fonction to get the kick power, in connection with :
 
-FORCETUBEVR void Kick(uint8 power);
-FORCETUBEVR void Shot(uint8 kickPower, uint8 rumblePower, float rumbleDuration);
+FORCETUBEVR void Kick(uint8 power, ForceTubeVRChannel target);
+FORCETUBEVR void Shot(uint8 kickPower, uint8 rumblePower, float rumbleDuration, ForceTubeVRChannel target);
 
 
 

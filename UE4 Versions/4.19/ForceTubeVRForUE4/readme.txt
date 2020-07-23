@@ -1,7 +1,7 @@
 Requirements : 
 
 First, you have to put this plugin in a "Plugins" folder inside your game directory.
-If you want to package for Android, you have to set minimum SDK version to 19 or higher in Edit->Project Settings->Platforms->Android.
+If you want to package for Android, you have to go in Edit->Project Settings->Platforms->Android, set the minimum SDK version to 19 or higher and enable the "Enable Gradle instead of Ant" option.
 To call these functions, you need to include "ForceTubeVRFunctions.h" before. You don't have to instantiate UForceTubeVRFunctions, because all these functions are static.
 Don't forget to turn on your bluetooth with a paired ForceTubeVR before any test.
 
