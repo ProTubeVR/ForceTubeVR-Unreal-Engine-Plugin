@@ -5,6 +5,8 @@ If you want to package for Android, you need to use the 4.17 plugin or higher. T
 To call these functions, you need to include "ForceTubeVRFunctions.h" before. You don't have to instantiate UForceTubeVRFunctions, because all these functions are static.
 Don't forget to turn on your bluetooth with a paired ForceTubeVR before any test.
 
+InitAsync is the first function you need to call in order to work with the ForceTube.
+
 
 Fonctions:
 
