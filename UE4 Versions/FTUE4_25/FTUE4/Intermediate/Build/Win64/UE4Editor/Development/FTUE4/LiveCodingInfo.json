@@ -1,0 +1,13 @@
+{
+	"RemapUnityFiles": 
+	{
+		"Module.FTUE4.cpp.obj": [
+			"FTUE4.cpp.obj",
+			"FTUE4BPLibrary.cpp.obj"
+		],
+		"Module.FTUE4.gen.cpp.obj": [
+			"FTUE4.init.gen.cpp.obj",
+			"FTUE4BPLibrary.gen.cpp.obj"
+		]
+	}
+}

@@ -1,0 +1,13 @@
+/NOLOGO
+/errorReport:prompt
+/MACHINE:x64
+/SUBSYSTEM:WINDOWS
+/DEF
+/NAME:"UE4Editor-FTUE4.dll"
+/IGNORE:4221
+/NODEFAULTLIB
+"E:\TESTING\New Unreal Plugin\ProjectTest\Intermediate\Build\Win64\ProjectTestEditor\Development\Engine\SharedPCH.Engine.h.obj"
+"E:\TESTING\New Unreal Plugin\ProjectTest\Plugins\FTUE4\Intermediate\Build\Win64\UE4Editor\Development\FTUE4\Module.FTUE4.cpp.obj"
+"E:\TESTING\New Unreal Plugin\ProjectTest\Plugins\FTUE4\Intermediate\Build\Win64\UE4Editor\Development\FTUE4\Module.FTUE4.gen.cpp.obj"
+"E:\TESTING\New Unreal Plugin\ProjectTest\Plugins\FTUE4\Intermediate\Build\Win64\UE4Editor\Development\FTUE4\PCLaunch.rc.res"
+/OUT:"E:\TESTING\New Unreal Plugin\ProjectTest\Plugins\FTUE4\Intermediate\Build\Win64\UE4Editor\Development\FTUE4\UE4Editor-FTUE4.lib"

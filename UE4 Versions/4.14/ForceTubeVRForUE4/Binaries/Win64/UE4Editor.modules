@@ -1,9 +1,0 @@
-{
-	"Changelist" : 3249277,
-	"CompatibleChangelist" : 3195953,
-	"BuildId" : "",
-	"Modules" : 
-	{
-		"ForceTubeVRForUE4" : "UE4Editor-ForceTubeVRForUE4.dll"
-	}
-}
