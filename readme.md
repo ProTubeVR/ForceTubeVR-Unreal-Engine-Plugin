@@ -23,7 +23,7 @@ This Unreal Engine plugin allows you to implement our ForceTube haptic technolog
 ## Installation
 First, create a "Plugins" folder at the root of your project.  
 Then, extract the plugin archive and copy it to the "Plugins" folder.  
-Launch UE4 and make sure that the plugin is enabled (Edit -> Plugins -> Project -> Other -> FTUE4)
+Launch UE and make sure that the plugin is enabled (Edit -> Plugins -> Project -> Other -> FTUE4 / PFTUE5)
 
 ## Usage
 
