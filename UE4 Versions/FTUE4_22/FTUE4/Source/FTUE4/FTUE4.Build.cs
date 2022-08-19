@@ -61,7 +61,13 @@ public class FTUE4 : ModuleRules
         }
 
 
-        DynamicallyLoadedModuleNames.AddRange(
+		if (Target.Platform == UnrealTargetPlatform.Win64)
+		{
+			RuntimeDependencies.Add("$(ProjectDir)/Plugins/PFTUE5/ForceTubeVR_API_x64.dll");
+
+		}
+
+		DynamicallyLoadedModuleNames.AddRange(
 			new string[]
 			{
 				// ... add any modules that your module loads dynamically here ...

@@ -55,6 +55,11 @@ public class PFTUE5 : ModuleRules
 			AdditionalPropertiesForReceipt.Add("AndroidPlugin", Path.Combine(ModuleDirectory, "ForceTubeVR_APL.xml")); 
 		}
 
+		if (Target.Platform == UnrealTargetPlatform.Win64)
+		{
+			RuntimeDependencies.Add("$(ProjectDir)/Plugins/PFTUE5/ForceTubeVR_API_x64.dll");
+
+		}
 
 
 		DynamicallyLoadedModuleNames.AddRange(

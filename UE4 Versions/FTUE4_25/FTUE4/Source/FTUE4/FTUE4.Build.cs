@@ -60,8 +60,14 @@ public class FTUE4 : ModuleRules
             //AdditionalPropertiesForReceipt.Add(new ReceiptProperty("AndroidPluginJar", Path.Combine(PluginPath, "../../Android/ForceTubeVR_API_Android.jar")));
         }
 
+		if (Target.Platform == UnrealTargetPlatform.Win64)
+		{
+			RuntimeDependencies.Add("$(ProjectDir)/Plugins/PFTUE5/ForceTubeVR_API_x64.dll");
 
-        DynamicallyLoadedModuleNames.AddRange(
+		}
+
+
+		DynamicallyLoadedModuleNames.AddRange(
 			new string[]
 			{
 				// ... add any modules that your module loads dynamically here ...
