@@ -62,7 +62,7 @@ public class FTUE4 : ModuleRules
 
 		if (Target.Platform == UnrealTargetPlatform.Win64)
 		{
-			RuntimeDependencies.Add("$(ProjectDir)/Plugins/PFTUE5/ForceTubeVR_API_x64.dll");
+			RuntimeDependencies.Add("$(ProjectDir)/Plugins/FTUE4/ForceTubeVR_API_x64.dll");
 
 		}
 
