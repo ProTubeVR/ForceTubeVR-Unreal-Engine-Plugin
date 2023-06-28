@@ -1,0 +1,12 @@
+/NOLOGO
+/errorReport:prompt
+/MACHINE:x64
+/SUBSYSTEM:WINDOWS
+/DEF
+/NAME:"UnrealEditor-PFTUE5.dll"
+/IGNORE:4221
+/NODEFAULTLIB
+"D:\New Unreal Plugin\FTUE5_2\Intermediate\Build\Win64\x64\FTUE5_2Editor\Development\Engine\SharedPCH.Engine.ShadowErrors.InclOrderUnreal5_1.h.obj"
+"D:\New Unreal Plugin\FTUE5_2\Plugins\PFTUE5\Intermediate\Build\Win64\x64\UnrealEditor\Development\PFTUE5\Module.PFTUE5.cpp.obj"
+"D:\New Unreal Plugin\FTUE5_2\Plugins\PFTUE5\Intermediate\Build\Win64\x64\UnrealEditor\Development\PFTUE5\Default.rc2.res"
+/OUT:"D:\New Unreal Plugin\FTUE5_2\Plugins\PFTUE5\Intermediate\Build\Win64\x64\UnrealEditor\Development\PFTUE5\UnrealEditor-PFTUE5.lib"

@@ -1,0 +1,24 @@
+{
+    "Version": "1.1",
+    "Data": {
+        "Source": "d:\\new unreal plugin\\ftue5_1\\plugins\\pftue5\\intermediate\\build\\win64\\unrealeditor\\development\\pftue5\\module.pftue5.cpp",
+        "ProvidedModule": "",
+        "PCH": "d:\\new unreal plugin\\ftue5_1\\intermediate\\build\\win64\\ftue5_1editor\\development\\engine\\sharedpch.engine.shadowerrors.inclorderunreal5_0.h.pch",
+        "Includes": [
+            "d:\\new unreal plugin\\ftue5_1\\plugins\\pftue5\\intermediate\\build\\win64\\unrealeditor\\development\\pftue5\\definitions.pftue5.h",
+            "d:\\new unreal plugin\\ftue5_1\\plugins\\pftue5\\intermediate\\build\\win64\\unrealeditor\\inc\\pftue5\\uht\\ftue4bplibrary.gen.cpp",
+            "d:\\new unreal plugin\\ftue5_1\\plugins\\pftue5\\source\\pftue5\\public\\ftue4bplibrary.h",
+            "d:\\unreal engine\\engines\\ue_5.1\\engine\\source\\runtime\\jsonutilities\\public\\jsonobjectconverter.h",
+            "d:\\unreal engine\\engines\\ue_5.1\\engine\\source\\runtime\\jsonutilities\\public\\jsonobjectwrapper.h",
+            "d:\\unreal engine\\engines\\ue_5.1\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\jsonutilities\\uht\\jsonobjectwrapper.generated.h",
+            "d:\\new unreal plugin\\ftue5_1\\plugins\\pftue5\\intermediate\\build\\win64\\unrealeditor\\inc\\pftue5\\uht\\ftue4bplibrary.generated.h",
+            "d:\\new unreal plugin\\ftue5_1\\plugins\\pftue5\\intermediate\\build\\win64\\unrealeditor\\inc\\pftue5\\uht\\pftue5.init.gen.cpp",
+            "d:\\new unreal plugin\\ftue5_1\\plugins\\pftue5\\source\\pftue5\\private\\ftue4bplibrary.cpp",
+            "d:\\new unreal plugin\\ftue5_1\\plugins\\pftue5\\source\\pftue5\\public\\pftue5.h",
+            "c:\\program files (x86)\\microsoft visual studio\\2019\\community\\vc\\tools\\msvc\\14.29.30133\\include\\string",
+            "d:\\new unreal plugin\\ftue5_1\\plugins\\pftue5\\source\\pftue5\\private\\pftue5.cpp"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

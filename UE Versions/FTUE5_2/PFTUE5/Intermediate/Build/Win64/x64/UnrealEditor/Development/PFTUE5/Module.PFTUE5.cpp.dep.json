@@ -1,0 +1,25 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "d:\\new unreal plugin\\ftue5_2\\plugins\\pftue5\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\pftue5\\module.pftue5.cpp",
+        "ProvidedModule": "",
+        "PCH": "d:\\new unreal plugin\\ftue5_2\\intermediate\\build\\win64\\x64\\ftue5_2editor\\development\\engine\\sharedpch.engine.shadowerrors.inclorderunreal5_1.h.pch",
+        "Includes": [
+            "d:\\new unreal plugin\\ftue5_2\\plugins\\pftue5\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\pftue5\\definitions.pftue5.h",
+            "d:\\new unreal plugin\\ftue5_2\\plugins\\pftue5\\intermediate\\build\\win64\\unrealeditor\\inc\\pftue5\\uht\\ftue4bplibrary.gen.cpp",
+            "d:\\new unreal plugin\\ftue5_2\\plugins\\pftue5\\source\\pftue5\\public\\ftue4bplibrary.h",
+            "d:\\unreal engine\\engines\\ue_5.2\\engine\\source\\runtime\\jsonutilities\\public\\jsonobjectconverter.h",
+            "d:\\unreal engine\\engines\\ue_5.2\\engine\\source\\runtime\\jsonutilities\\public\\jsonobjectwrapper.h",
+            "d:\\unreal engine\\engines\\ue_5.2\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\jsonutilities\\uht\\jsonobjectwrapper.generated.h",
+            "d:\\new unreal plugin\\ftue5_2\\plugins\\pftue5\\intermediate\\build\\win64\\unrealeditor\\inc\\pftue5\\uht\\ftue4bplibrary.generated.h",
+            "d:\\new unreal plugin\\ftue5_2\\plugins\\pftue5\\intermediate\\build\\win64\\unrealeditor\\inc\\pftue5\\uht\\pftue5.init.gen.cpp",
+            "d:\\new unreal plugin\\ftue5_2\\plugins\\pftue5\\source\\pftue5\\private\\ftue4bplibrary.cpp",
+            "d:\\new unreal plugin\\ftue5_2\\plugins\\pftue5\\source\\pftue5\\public\\pftue5.h",
+            "c:\\program files\\microsoft visual studio\\2022\\community\\vc\\tools\\msvc\\14.34.31933\\include\\string",
+            "c:\\program files\\microsoft visual studio\\2022\\community\\vc\\tools\\msvc\\14.34.31933\\include\\cctype",
+            "d:\\new unreal plugin\\ftue5_2\\plugins\\pftue5\\source\\pftue5\\private\\pftue5.cpp"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}
